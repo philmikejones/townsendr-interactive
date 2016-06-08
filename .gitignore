@@ -7,3 +7,4 @@
 *.pdf
 .gitignore~
 
+packrat/lib*/
