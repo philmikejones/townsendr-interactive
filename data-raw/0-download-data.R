@@ -1,17 +1,23 @@
-# Car or van access
-# persons per room
-# tenure
-# unemployment
+# Base URL
+url_1 <- "https://www.nomisweb.co.uk/api/v01/dataset/"
+url_2 <- ".data.csv?date=latest&geography="
+url_3 <- "&rural_urban=0&cell=1...5&measures=20100&signature=NPK-0c73734c0f725c979cee3a:0xaabfb6be3b4d4f4a1253f7b9aaca60e457728be7"
+
+# Variable
+car   <- "NM_621_1"
+ppr   <- "NM_541_1"
+ten   <- "NM_537_1"
+une   <- "NM_556_1"
+
+# Geography
+msoa  <- "1245708289...1245715489"
+lad   <- "TYPE464"
 
 
-# Percentage of households with access to a light vehicle
-"http://www.nomisweb.co.uk/api/v01/dataset/NM_548_1.data.csv?geography=TYPE464&RURAL_URBAN=0&CELL=2,3,4,5&MEASURES=20301&select=GEOGRAPHY_NAME,GEOGRAPHY_CODE,CELL_NAME,OBS_VALUE"
-"http://www.nomisweb.co.uk/api/v01/dataset/NM_541_1.data.csv?GEOGRAPHY=TYPE464&RURAL_URBAN=0&C_PPROOMHUK11=3,4&MEASURES=20301&select=GEOGRAPHY_NAME,GEOGRAPHY_CODE,C_PPROOMHUK11_NAME,OBS_VALUE"
-"http://www.nomisweb.co.uk/api/v01/dataset/NM_537_1/GEOGRAPHY/2092957703TYPE464/RURAL_URBAN/0/C_TENHUK11/4,5,8,13/MEASURES/20301/data.csv?select=GEOGRAPHY_NAME,GEOGRAPHY_CODE,C_TENHUK11_NAME,OBS_VALUE"
 
-"http://www.nomisweb.co.uk/api/v01/dataset/NM_556_1/GEOGRAPHY/2092957703TYPE464/RURAL_URBAN/0/CELL/1,8/MEASURES/20100/data.csv?select=GEOGRAPHY_NAME,GEOGRAPHY_CODE,CELL_NAME,OBS_VALUE"
-
-
+download.file(paste0(url_1, car, url_2, lad, url_3),
+              destfile = "extdata/car-msoa.csv")
+readr::read_csv("extdata/car-msoa.csv")
 
 # Z-scores ====
 # Calculate z-score

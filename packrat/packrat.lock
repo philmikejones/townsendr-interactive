@@ -157,6 +157,12 @@ Source: CRAN
 Version: 1.0.0
 Hash: 77da8f1df873a4b91e5c4a68fe2fb1b6
 
+Package: readr
+Source: CRAN
+Version: 0.2.2
+Hash: 26f8572dee39ace757753fa5c4286569
+Requires: BH, Rcpp, curl
+
 Package: reshape2
 Source: CRAN
 Version: 1.4.1
