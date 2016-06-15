@@ -1,5 +1,5 @@
 Package: townsendr
-Version: 0.1
+Version: 3.1
 Date: 2015-10-04
 Title: Townsend Material Deprivation Index in R
 Authors@R: person("Phil Mike", "Jones", role = c("aut", "cre"),
@@ -17,7 +17,7 @@ Suggests:
     testthat,
     readr,
     downloader,
-    magrittr,
     tidyr
 RoxygenNote: 5.0.1
-Imports: dplyr
+Imports: dplyr,
+    magrittr
