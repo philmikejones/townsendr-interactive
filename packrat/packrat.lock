@@ -95,8 +95,8 @@ Hash: cd78381a9d3fea966ac39bd0daaf5554
 
 Package: httr
 Source: CRAN
-Version: 1.1.0
-Hash: 27ffb4b4dbb8ac4019126070d66910fc
+Version: 1.2.0
+Hash: cd5c30acde81117f6b9da436dffeaedf
 Requires: R6, curl, jsonlite, mime, openssl
 
 Package: jsonlite
@@ -111,8 +111,8 @@ Hash: ecf589b42cd284b03a4beb9665482d3e
 
 Package: lazyeval
 Source: CRAN
-Version: 0.1.10
-Hash: 9679f1ac7f6bc07bc79755f34cd15e1f
+Version: 0.2.0
+Hash: 3d6e7608e65bbf5cb170dab1e3c9ed8b
 
 Package: magrittr
 Source: CRAN
