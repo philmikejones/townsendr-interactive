@@ -17,8 +17,10 @@ downloader::download(ppr, destfile = "extdata/lad_ppr.csv")
 downloader::download(ten, destfile = "extdata/lad_ten.csv")
 downloader::download(eau, destfile = "extdata/lad_eau.csv")
 
-
-
+car <- readr::read_csv("extdata/lad_car.csv")
+ppr <- readr::read_csv("extdata/lad_ppr.csv")
+ten <- readr::read_csv("extdata/lad_ten.csv")
+eau <- readr::read_csv("extdata/lad_eau.csv")
 
 
 # Z-scores ====
