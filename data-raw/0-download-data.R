@@ -16,18 +16,3 @@ downloader::download(car, destfile = "extdata/lad_car.csv")
 downloader::download(ppr, destfile = "extdata/lad_ppr.csv")
 downloader::download(ten, destfile = "extdata/lad_ten.csv")
 downloader::download(eau, destfile = "extdata/lad_eau.csv")
-
-car <- readr::read_csv("extdata/lad_car.csv")
-ppr <- readr::read_csv("extdata/lad_ppr.csv")
-ten <- readr::read_csv("extdata/lad_ten.csv")
-eau <- readr::read_csv("extdata/lad_eau.csv")
-
-
-
-
-# Z-scores ====
-# Calculate z-score
-td$zCar <- scale(td$car, center = TRUE, scale = TRUE)
-td$zOvc <- scale(td$ovc, center = TRUE, scale = TRUE)
-td$zTen <- scale(td$ten, center = TRUE, scale = TRUE)
-td$zEau <- scale(td$eau, center = TRUE, scale = TRUE)
