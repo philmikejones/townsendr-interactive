@@ -7,7 +7,6 @@
 
 packrat/lib*/
 *.zip
-
 *.shp
 *.dbf
 *.shx

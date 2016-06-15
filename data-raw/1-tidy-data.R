@@ -44,6 +44,13 @@ lad <- rgdal::readOGR(dsn = "extdata/lad", "england_lad_2011_gen")
 for (i in seq_along(colnames(lad@data))) {
   lad@data[, i] <- as.character(lad@data[, i])
 }
+rm(i)
 
-dplyr::anti_join(lad@data, car, by = c("label" = "geo_code"))
-
+no_match <- dplyr::anti_join(lad@data, car, by = c("label" = "geo_code"))
+for (i in no_match[["name"]]) {
+  car$geo_code[car$geo_name == i] <- lad@data$label[lad@data$name == i]
+  ppr$geo_code[ppr$geo_name == i] <- lad@data$label[lad@data$name == i]
+  ten$geo_code[ten$geo_name == i] <- lad@data$label[lad@data$name == i]
+  eau$geo_code[eau$geo_name == i] <- lad@data$label[lad@data$name == i]
+}
+rm(i, no_match)
