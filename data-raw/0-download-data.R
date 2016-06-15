@@ -23,6 +23,8 @@ ten <- readr::read_csv("extdata/lad_ten.csv")
 eau <- readr::read_csv("extdata/lad_eau.csv")
 
 
+
+
 # Z-scores ====
 # Calculate z-score
 td$zCar <- scale(td$car, center = TRUE, scale = TRUE)

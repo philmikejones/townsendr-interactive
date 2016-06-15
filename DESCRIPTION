@@ -6,9 +6,18 @@ Authors@R: person("Phil Mike", "Jones", role = c("aut", "cre"),
 		     email = "philmikejones@gmail.com")
 Author: Phil Mike Jones <philmikejones@gmail.com>
 Maintainer: Phil Mike Jones <philmikejones@gmail.com>
-Depends: R (>= 3.2.0), dplyr, reshape2, ggplot2, rgdal, rgeos
-Description: Calculates the Townsend Material Deprivation Index for requested geographical areas in the UK.
+Depends:
+    R (>= 3.2.0)
+Description: Calculates the Townsend Material Deprivation Index for requested
+    geographical areas in the UK.
 License: GPL (>= 3)
 URL: http://philmikejones.github.io/townsend-depr-score-2011
 BugReports: https://github.com/philmikejones/townsend-depr-score-2011/issues
-Suggests: testthat
+Suggests:
+    testthat,
+    readr,
+    downloader,
+    magrittr,
+    tidyr
+RoxygenNote: 5.0.1
+Imports: dplyr
