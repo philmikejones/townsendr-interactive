@@ -12,3 +12,4 @@ packrat/lib*/
 *.dbf
 *.shx
 *.prj
+extdata/*.html
