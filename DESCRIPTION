@@ -19,4 +19,6 @@ Suggests:
     downloader,
     tidyr
 RoxygenNote: 5.0.1
-Imports: dplyr
+Imports: dplyr,
+    rgeos,
+    rgdal

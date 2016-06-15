@@ -16,3 +16,7 @@ downloader::download(car, destfile = "extdata/lad_car.csv")
 downloader::download(ppr, destfile = "extdata/lad_ppr.csv")
 downloader::download(ten, destfile = "extdata/lad_ten.csv")
 downloader::download(eau, destfile = "extdata/lad_eau.csv")
+
+lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/prebuilt/",
+              "shape/England_lad_2011_gen.zip")
+download.file(lad, destfile = "extdata/lad.zip", method = "wget")

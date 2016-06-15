@@ -41,3 +41,4 @@ eau[["pc_eau"]] <- eau[["Economically active: Unemployed"]] /
 eau[["pc_eau"]] <- eau[["pc_eau"]] * 100
 eau <- dplyr::select(eau, -3, -4)
 colnames(eau) <- c("geo_code", "geo_name", "pc_eau")
+
