@@ -71,6 +71,12 @@ Source: CRAN
 Version: 0.6.9
 Hash: fd55d5a024f160fc001a5ece1e27782d
 
+Package: downloader
+Source: CRAN
+Version: 0.4
+Hash: c99f05ffa816e03ece87b37ea9d4f0ed
+Requires: digest
+
 Package: dplyr
 Source: CRAN
 Version: 0.4.3
