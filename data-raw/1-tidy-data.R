@@ -1,5 +1,3 @@
-source("data-raw/0-download-data.R")
-
 car <- readr::read_csv("extdata/lad_car.csv")
 car <- car[-nrow(car), ]
 car <- dplyr::select(car, GEOGRAPHY_CODE, GEOGRAPHY_NAME, CELL_NAME, OBS_VALUE)
@@ -41,4 +39,11 @@ eau[["pc_eau"]] <- eau[["Economically active: Unemployed"]] /
 eau[["pc_eau"]] <- eau[["pc_eau"]] * 100
 eau <- dplyr::select(eau, -3, -4)
 colnames(eau) <- c("geo_code", "geo_name", "pc_eau")
+
+lad <- rgdal::readOGR(dsn = "extdata/lad", "england_lad_2011_gen")
+for (i in seq_along(colnames(lad@data))) {
+  lad@data[, i] <- as.character(lad@data[, i])
+}
+
+dplyr::anti_join(lad@data, car, by = c("label" = "geo_code"))
 

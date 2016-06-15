@@ -20,3 +20,5 @@ downloader::download(eau, destfile = "extdata/lad_eau.csv")
 lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/prebuilt/",
               "shape/England_lad_2011_gen.zip")
 download.file(lad, destfile = "extdata/lad.zip", method = "wget")
+dir.create("extdata/lad/", recursive = TRUE)
+unzip("extdata/lad.zip", exdir = "extdata/lad/")
