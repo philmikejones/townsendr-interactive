@@ -2,9 +2,13 @@
 .Rhistory
 .RData
 .Rapp.history
-/maps
-/shapes
 *.pdf
 .gitignore~
 
 packrat/lib*/
+*.zip
+*.shp
+*.dbf
+*.shx
+*.prj
+*.html

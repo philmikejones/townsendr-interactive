@@ -1,27 +1,24 @@
-# Base URL
-url_1 <- "https://www.nomisweb.co.uk/api/v01/dataset/"
-url_2 <- ".data.csv?date=latest&geography="
-url_3 <- "&rural_urban=0&cell=1...5&measures=20100&signature=NPK-0c73734c0f725c979cee3a:0xaabfb6be3b4d4f4a1253f7b9aaca60e457728be7"
+# LADs ====
+car <- paste0("https://www.nomisweb.co.uk/api/v01/dataset/NM_621_1.data.csv?",
+              "date=latest&geography=1946157057...1946157404&rural_urban=0&",
+              "cell=0,1&measures=20100")
+ppr <- paste0("https://www.nomisweb.co.uk/api/v01/dataset/NM_541_1.data.csv?",
+              "date=latest&geography=1946157057...1946157404&rural_urban=0&",
+              "c_pproomhuk11=0,3,4&measures=20100")
+ten <- paste0("https://www.nomisweb.co.uk/api/v01/dataset/NM_619_1.data.csv?",
+              "date=latest&geography=1946157057...1946157404&rural_urban=0&",
+              "cell=0,100&measures=20100")
+eau <- paste0("https://www.nomisweb.co.uk/api/v01/dataset/NM_556_1.data.csv?",
+              "date=latest&geography=1946157057...1946157404&rural_urban=0&",
+              "cell=1,8&measures=20100")
 
-# Variable
-car   <- "NM_621_1"
-ppr   <- "NM_541_1"
-ten   <- "NM_537_1"
-une   <- "NM_556_1"
+downloader::download(car, destfile = "extdata/lad_car.csv")
+downloader::download(ppr, destfile = "extdata/lad_ppr.csv")
+downloader::download(ten, destfile = "extdata/lad_ten.csv")
+downloader::download(eau, destfile = "extdata/lad_eau.csv")
 
-# Geography
-msoa  <- "1245708289...1245715489"
-lad   <- "TYPE464"
-
-
-
-download.file(paste0(url_1, car, url_2, lad, url_3),
-              destfile = "extdata/car-msoa.csv")
-readr::read_csv("extdata/car-msoa.csv")
-
-# Z-scores ====
-# Calculate z-score
-td$zCar <- scale(td$car, center = TRUE, scale = TRUE)
-td$zOvc <- scale(td$ovc, center = TRUE, scale = TRUE)
-td$zTen <- scale(td$ten, center = TRUE, scale = TRUE)
-td$zEau <- scale(td$eau, center = TRUE, scale = TRUE)
+lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/prebuilt/",
+              "shape/England_lad_2011_gen.zip")
+download.file(lad, destfile = "extdata/lad.zip", method = "wget")
+dir.create("extdata/lad/", recursive = TRUE)
+unzip("extdata/lad.zip", exdir = "extdata/lad/")
