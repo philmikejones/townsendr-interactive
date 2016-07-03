@@ -45,9 +45,8 @@ Hash: 00bb12245cd975c450cc4a960884fa15
 
 Package: crayon
 Source: CRAN
-Version: 1.3.1
-Hash: b61d34886cf0f4b4fc4e4f52ea249390
-Requires: memoise
+Version: 1.3.2
+Hash: 576a9d297a567d6a5ebd164ca5221590
 
 Package: curl
 Source: CRAN
@@ -56,8 +55,8 @@ Hash: 8a3eaed84ed6a9a188efdeddb231c5de
 
 Package: devtools
 Source: CRAN
-Version: 1.11.1
-Hash: 4c6aa014d917044bf376a363c3c8ee1a
+Version: 1.12.0
+Hash: bbad95109ae75cbb14099281cda43af2
 Requires: digest, git2r, httr, jsonlite, memoise, rstudioapi, whisker,
     withr
 
@@ -79,9 +78,9 @@ Requires: digest
 
 Package: dplyr
 Source: CRAN
-Version: 0.4.3
-Hash: e6d3a09516f2018080e4737423aadfa6
-Requires: BH, DBI, R6, Rcpp, assertthat, lazyeval, magrittr
+Version: 0.5.0
+Hash: bdfac738899f1f65b932f4c6f10c2cff
+Requires: BH, DBI, R6, Rcpp, assertthat, lazyeval, magrittr, tibble
 
 Package: ggplot2
 Source: CRAN
@@ -107,8 +106,8 @@ Requires: R6, curl, jsonlite, mime, openssl
 
 Package: jsonlite
 Source: CRAN
-Version: 0.9.21
-Hash: 4715435f79ce983ec7e041f6be4742f4
+Version: 1.0
+Hash: f32817e181c39ede83fdd3e699348b69
 
 Package: labeling
 Source: CRAN
@@ -195,8 +194,8 @@ Requires: Rcpp, brew, digest, stringi, stringr
 
 Package: rstudioapi
 Source: CRAN
-Version: 0.5
-Hash: f942db72a8f51e968b061f28058e2c57
+Version: 0.6
+Hash: fd256f8bfb9a64cc35f98b0decb1a79f
 
 Package: scales
 Source: CRAN
@@ -245,5 +244,5 @@ Hash: 803d662762e532705c2c066a82d066e7
 
 Package: withr
 Source: CRAN
-Version: 1.0.1
-Hash: e3d37838719e5d66652364e2aefebcee
+Version: 1.0.2
+Hash: 774eb7be9087cdc24b53b74e5359cfac
