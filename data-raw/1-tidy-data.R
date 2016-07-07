@@ -7,10 +7,6 @@ colnames(lad_car) <- c("code", "name", "total", "variable")
 lad_car$z_car <- calc_z(lad_car)
 
 
-
-
-
-
 colnames(car) <- c("geo_code", "geo_name", "z_car")
 
 ppr <- readr::read_csv("extdata/lad_ppr.csv")

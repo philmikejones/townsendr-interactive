@@ -20,9 +20,9 @@ frame
 \details{
 Expects the following columns:
 1. GEOGRAPHY_CODE
-1. GEOGRAPHY_NAME
-1. CELL_NAME
-1. OBS_VALUE
+2. GEOGRAPHY_NAME
+3. CELL_NAME
+4. OBS_VALUE
 
 These are obtained from Nomis
 }
