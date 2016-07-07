@@ -219,12 +219,6 @@ Version: 1.0.0
 Hash: 2676dd5f88890910962b733b0f9540e1
 Requires: magrittr, stringi
 
-Package: testthat
-Source: CRAN
-Version: 1.0.2
-Hash: 88d5291104227f9dc2e7c7c1d0eb6c74
-Requires: R6, crayon, digest, magrittr, praise
-
 Package: tibble
 Source: CRAN
 Version: 1.1

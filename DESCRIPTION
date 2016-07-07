@@ -13,11 +13,9 @@ Description: Calculates the Townsend Material Deprivation Index for requested
 License: GPL (>= 3)
 BugReports: https://github.com/philmikejones/townsendr/issues
 Suggests:
-    testthat,
     readr,
     downloader,
     tidyr
 RoxygenNote: 5.0.1
 Imports: dplyr,
-    rgeos,
     rgdal
