@@ -1,9 +1,16 @@
 # LADs ====
-lad_car <- readr::read_csv("inst/extdata/lad_car.csv")
-lad_car <- lad_car[-nrow(lad_car), ]  # remove last row containing NAs
-lad_car <- lad_car[, c("GEOGRAPHY_CODE", "GEOGRAPHY_NAME", "CELL_NAME",
-                       "OBS_VALUE"), drop = FALSE]
-lad_car <- tidyr::spread(lad_car, CELL_NAME, OBS_VALUE)
+prepare_domain <- function(variable) {
+  tmp <- readr::read_csv(paste0("inst/extdata/", variable, ".csv"))
+  tmp <- tmp[-nrow(tmp), ]  # remove last row containing NAs
+  tmp <- tmp[, c("GEOGRAPHY_CODE", "GEOGRAPHY_NAME", "CELL_NAME",
+                         "OBS_VALUE"), drop = FALSE]
+  tmp <- tidyr::spread(tmp, CELL_NAME, OBS_VALUE)
+
+  tmp
+}
+
+prepare_domain(lad_car)
+
 
 stop()
 
