@@ -1,29 +1,16 @@
 # LADs ====
 lad_car <- readr::read_csv("inst/extdata/lad_car.csv")
-
-
-
-prep_variable <- function(var) {
-  if (all(is.na(var[nrow(var), ]))) {  # test if last row is NA
-    var <- var[-nrow(var), , drop = FALSE]  # remove last row containing NAs
-  }
-  var
-}
 lad_car <- prep_variable(lad_car)
 
-tmp <- lad_car[, c("GEOGRAPHY_CODE", "GEOGRAPHY_NAME", "CELL_NAME",
-                   "OBS_VALUE"), drop = FALSE]
-tmp <- tidyr::spread(lad_car, CELL_NAME, OBS_VALUE)
+colnames(lad_car) <- c("code", "name", "total", "variable")
+
+lad_car$z_car <- calc_z(lad_car)
 
 
 
 
 
-car[["pc_car"]] <- car[["No cars or vans in household"]] /
-  car[["All categories: Car or van availability"]]
-car[["pc_car"]] <- car[["pc_car"]] * 100
-car$z_car <- scale(car$pc_car, scale = TRUE, center = TRUE)
-car <- dplyr::select(car, -3, -4, -5)
+
 colnames(car) <- c("geo_code", "geo_name", "z_car")
 
 ppr <- readr::read_csv("extdata/lad_ppr.csv")
