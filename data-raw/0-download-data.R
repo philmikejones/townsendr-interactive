@@ -24,11 +24,8 @@ lad_eau <- paste0("https://www.nomisweb.co.uk/api/v01/dataset/",
 downloader::download(lad_eau, destfile = "inst/extdata/lad_eau.csv")
 
 
-
-
-
-lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/prebuilt/",
-              "shape/England_lad_2011_gen.zip")
-download.file(lad, destfile = "extdata/lad.zip", method = "wget")
-dir.create("extdata/lad/", recursive = TRUE)
-unzip("extdata/lad.zip", exdir = "extdata/lad/")
+# Shapefiles ====
+shp_lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/",
+                  "prebuilt/shape/England_lad_2011_gen.zip")
+get_shape(shp_lad, destfile = "inst/extdata/shp_lad.zip",
+          exdir = "inst/extdata/", method = "wget")

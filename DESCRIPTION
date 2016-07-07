@@ -11,8 +11,7 @@ Depends:
 Description: Calculates the Townsend Material Deprivation Index for requested
     geographical areas in the UK.
 License: GPL (>= 3)
-URL: http://philmikejones.github.io/townsend-depr-score-2011
-BugReports: https://github.com/philmikejones/townsend-depr-score-2011/issues
+BugReports: https://github.com/philmikejones/townsendr/issues
 Suggests:
     testthat,
     readr,
