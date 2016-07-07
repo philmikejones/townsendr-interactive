@@ -1,28 +1,20 @@
 # LADs ====
 lad_car <- readr::read_csv("inst/extdata/lad_car.csv")
 lad_car <- prep_variable(lad_car)
-
 colnames(lad_car) <- c("code", "name", "total", "variable")
-
 lad_car$z_car <- calc_z(lad_car)
+lad_car <- lad_car[, c("code", "name", "z_car")]
 
+lad_ppr <- readr::read_csv("inst/extdata/lad_ppr.csv")
+colnames(lad_ppr)[20] <- "CELL_NAME"
+lad_ppr <- prep_variable(lad_ppr)
+lad_ppr$variable <- rowSums(lad_ppr[, 4:5])
+lad_ppr <- lad_ppr[, c(1:3, 6)]
+colnames(lad_ppr) <- c("code", "name", "total", "variable")
+lad_ppr$z_ppr <- calc_z(lad_ppr)
+lad_ppr <- lad_ppr[, c("code", "name", "z_ppr")]
 
-colnames(car) <- c("geo_code", "geo_name", "z_car")
-
-ppr <- readr::read_csv("extdata/lad_ppr.csv")
-ppr <- ppr[-nrow(ppr), ]
-ppr <- dplyr::select(ppr, GEOGRAPHY_CODE, GEOGRAPHY_NAME, C_PPROOMHUK11_NAME,
-                     OBS_VALUE)
-ppr <- tidyr::spread(ppr, C_PPROOMHUK11_NAME, OBS_VALUE)
-ppr[["pc_ppr"]] <- ppr[["Over 1.0 and up to 1.5 persons per room"]] +
-  ppr[["Over 1.5 persons per room"]]
-ppr[["pc_ppr"]] <- ppr[["pc_ppr"]] /
-  ppr[["All categories: Number of persons per room in household"]]
-ppr[["pc_ppr"]] <- ppr[["pc_ppr"]] * 100
-ppr$z_ppr <- scale(ppr$pc_ppr, scale = TRUE, center = TRUE)
-ppr <- dplyr::select(ppr, -3, -4, -5, -6)
-colnames(ppr) <- c("geo_code", "geo_name", "z_ppr")
-
+stop()
 ten <- readr::read_csv("extdata/lad_ten.csv")
 ten <- ten[-nrow(ten), ]
 ten <- dplyr::select(ten, GEOGRAPHY_CODE, GEOGRAPHY_NAME, CELL_NAME, OBS_VALUE)
