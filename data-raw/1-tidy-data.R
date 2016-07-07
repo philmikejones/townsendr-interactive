@@ -1,8 +1,12 @@
 # LADs ====
-car <- readr::read_csv("extdata/lad_car.csv")
-car <- car[-nrow(car), ]
-car <- dplyr::select(car, GEOGRAPHY_CODE, GEOGRAPHY_NAME, CELL_NAME, OBS_VALUE)
-car <- tidyr::spread(car, CELL_NAME, OBS_VALUE)
+lad_car <- readr::read_csv("inst/extdata/lad_car.csv")
+lad_car <- lad_car[-nrow(lad_car), ]  # remove last row containing NAs
+lad_car <- lad_car[, c("GEOGRAPHY_CODE", "GEOGRAPHY_NAME", "CELL_NAME",
+                       "OBS_VALUE"), drop = FALSE]
+lad_car <- tidyr::spread(lad_car, CELL_NAME, OBS_VALUE)
+
+stop()
+
 car[["pc_car"]] <- car[["No cars or vans in household"]] /
   car[["All categories: Car or van availability"]]
 car[["pc_car"]] <- car[["pc_car"]] * 100

@@ -27,5 +27,5 @@ downloader::download(lad_eau, destfile = "inst/extdata/lad_eau.csv")
 # Shapefiles ====
 shp_lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/",
                   "prebuilt/shape/England_lad_2011_gen.zip")
-get_shape(shp_lad, destfile = "inst/extdata/shp_lad.zip",
+townsendr:::get_shape(shp_lad, destfile = "inst/extdata/shp_lad.zip",
           exdir = "inst/extdata/", method = "wget")
