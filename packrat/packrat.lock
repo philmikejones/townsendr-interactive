@@ -100,8 +100,8 @@ Hash: cd78381a9d3fea966ac39bd0daaf5554
 
 Package: httr
 Source: CRAN
-Version: 1.2.0
-Hash: cd5c30acde81117f6b9da436dffeaedf
+Version: 1.2.1
+Hash: 7de1f8f760441881804af7c1ff324340
 Requires: R6, curl, jsonlite, mime, openssl
 
 Package: jsonlite
@@ -132,8 +132,8 @@ Requires: digest
 
 Package: mime
 Source: CRAN
-Version: 0.4
-Hash: b08c52dae92a0a11e64a4deea032ec33
+Version: 0.5
+Hash: 463550cf44fb6f0a2359368f42eebe62
 
 Package: munsell
 Source: CRAN
@@ -227,8 +227,8 @@ Requires: R6, crayon, digest, magrittr, praise
 
 Package: tibble
 Source: CRAN
-Version: 1.0
-Hash: 135bebe37e899e9ebabcfdf74cb86ade
+Version: 1.1
+Hash: 2adf5d30afaa827aafc9e65490779025
 Requires: Rcpp, assertthat, lazyeval
 
 Package: tidyr
