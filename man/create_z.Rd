@@ -12,13 +12,28 @@ population, and population of interest (the Townsend variable) to perform
 the z calculation on}
 }
 \value{
-
+A tidy data frame containing geography code, geography name, and
+z score
 }
 \description{
 Creates a data frame containing the geography code, name, and z_score for
 the variable requested
 }
+\details{
+Expects at least the following columns (other columns are silenty dropped):
+\enumerate{
+ \item GEOGRAPHY_CODE
+ \item GEOGRAPHY_NAME
+ \item CELL_NAME
+ \item OBS_VALUE
+}
+
+Data frames of this specific format can be obtained from Nomis Web.
+}
 \examples{
 create_z(lad_car)
+}
+\seealso{
+Nomis web: \url{http://nomisweb.co.uk}
 }
 

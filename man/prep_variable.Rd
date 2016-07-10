@@ -7,26 +7,32 @@
 prep_variable(var)
 }
 \arguments{
-\item{var}{The variable to prepare}
+\item{var}{A data frame to tidy}
 }
 \value{
-
+Returns a (tidy) data frame
 }
 \description{
-Prepares Townsend variables. Specifically removes last row if it contains
-NAs, removes unneeded columns, and spreads the data to form a tidy data
-frame
+Prepares Townsend variables from raw data obtained from Nomis web.
 }
 \details{
-Expects the following columns:
-1. GEOGRAPHY_CODE
-2. GEOGRAPHY_NAME
-3. CELL_NAME
-4. OBS_VALUE
+Removes last row if it contains NAs, removes unneeded columns, and spreads
+the data to form a tidy data frame
 
-These are obtained from Nomis
+Expects a data frame with at least the following columns (other columns can
+be present and are silently dropped):
+\enumerate{
+ \item GEOGRAPHY_CODE
+ \item GEOGRAPHY_NAME
+ \item CELL_NAME
+ \item OBS_VALUE
+}
+Data frames in this format can be obtained from Nomis
 }
 \examples{
-prep_variable(car)  # where car is a data frame object
+prep_variable(lad_car)  # where lad_car is a data frame object
+}
+\seealso{
+Nomis: \url{http://www.nomisweb.co.uk}
 }
 

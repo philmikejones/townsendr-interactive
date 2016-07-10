@@ -4,21 +4,21 @@
 \alias{calc_z}
 \title{calc_z}
 \usage{
-calc_z(var, scale = TRUE, center = TRUE)
+calc_z(var, ...)
 }
 \arguments{
 \item{var}{Variable to scale (create z score)}
 
-\item{scale}{arguments passed to scale(). Defaults to TRUE}
-
-\item{center}{arguments passed to scale(). Defaults to TRUE}
+\item{...}{additional arguments to pass to scale() (e.g. to change default
+behaviour of scale and center arguments)}
 }
 \value{
-
+Returns a vector with z scores calculated from called argument.
+Typically assigned to a new column from the original data frame.
 }
 \description{
-Calculates the z score of a given data frame variable. Usually called as
-part of `create_z` function
+Calculates the z score of a given data frame column. Internal function
+which is usually called as part of `create_z` function.
 }
 \examples{
 calc_z(lad_car) Calculates z score for car ownership

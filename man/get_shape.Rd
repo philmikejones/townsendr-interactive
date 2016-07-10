@@ -16,11 +16,15 @@ get_shape(url, destfile, exdir, ...)
 \item{...}{extra arguments to pass to download.file (i.e. method = "wget")}
 }
 \value{
-
+Returns an unzipped shapefile
 }
 \description{
-Internal function for obtaining and unziping shapefiles,
+Internal (not exported) function for obtaining and unziping shapefiles,
 typically from edina.ac.uk
+}
+\details{
+Typically used with `create_z()` function. Call for its side effects; i.e.
+does not need to be assigned (`<-`)
 }
 \examples{
 get_shape(shape_url, "inst/extdata/shape.zip", "inst/extdata")
