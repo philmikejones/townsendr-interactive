@@ -49,6 +49,9 @@ prep_variable <- function(var) {
 
 #' calc_z
 #'
+#' Calculates the z score of a given data frame variable. Usually called as
+#' part of `create_z` function
+#'
 #' @param var Variable to scale (create z score)
 #' @param scale arguments passed to scale(). Defaults to TRUE
 #' @param center arguments passed to scale(). Defaults to TRUE
@@ -60,4 +63,23 @@ calc_z <- function(var, scale = TRUE, center = TRUE) {
   z <- var[["variable"]] / var[["total"]] * 100
   z <- scale(z, scale = scale, center = center)
   z
+}
+
+#' create_z
+#'
+#' Creates a data frame containing the geography code, name, and z_score for
+#' the variable requested
+#'
+#' @param var A dataframe containing geography code, geography name, total
+#' population, and population of interest (the Townsend variable) to perform
+#' the z calculation on
+#'
+#' @return
+#'
+#' @examples create_z(lad_car)
+create_z <- function(var) {
+  var           <- prep_variable(var)
+  colnames(var) <- c("code", "name", "total", "variable")
+  var$z_car     <- calc_z(var)
+  var           <- var[, grep("code|name|z_", colnames(var))]
 }

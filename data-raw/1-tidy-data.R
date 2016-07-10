@@ -1,9 +1,12 @@
 # LADs ====
 lad_car <- readr::read_csv("inst/extdata/lad_car.csv")
-lad_car <- prep_variable(lad_car)
-colnames(lad_car) <- c("code", "name", "total", "variable")
-lad_car$z_car <- calc_z(lad_car)
-lad_car <- lad_car[, c("code", "name", "z_car")]
+lad_car <- create_z(lad_car)
+
+lad_ten <- readr::read_csv("inst/extdata/lad_ten.csv")
+lad_ten <- create_z(lad_ten)
+
+lad_eau <- readr::read_csv("inst/extdata/lad_eau.csv")
+lad_eau <- create_z(lad_eau)
 
 lad_ppr <- readr::read_csv("inst/extdata/lad_ppr.csv")
 colnames(lad_ppr)[20] <- "CELL_NAME"
@@ -14,17 +17,7 @@ colnames(lad_ppr) <- c("code", "name", "total", "variable")
 lad_ppr$z_ppr <- calc_z(lad_ppr)
 lad_ppr <- lad_ppr[, c("code", "name", "z_ppr")]
 
-lad_ten <- readr::read_csv("inst/extdata/lad_ten.csv")
-lad_ten <- prep_variable(lad_ten)
-colnames(lad_ten) <- c("code", "name", "total", "variable")
-lad_ten$z_ten <- calc_z(lad_ten)
-lad_ten <- lad_ten[, c("code", "name", "z_ten")]
 
-lad_eau <- readr::read_csv("inst/extdata/lad_eau.csv")
-lad_eau <- prep_variable(lad_eau)
-colnames(lad_eau) <- c("code", "name", "total", "variable")
-lad_eau$z_eau <- calc_z(lad_eau)
-lad_eau <- lad_eau[, c("code", "name", "z_eau")]
 
 
 

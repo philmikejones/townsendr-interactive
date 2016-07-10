@@ -17,7 +17,8 @@ calc_z(var, scale = TRUE, center = TRUE)
 
 }
 \description{
-calc_z
+Calculates the z score of a given data frame variable. Usually called as
+part of `create_z` function
 }
 \examples{
 calc_z(lad_car) Calculates z score for car ownership
