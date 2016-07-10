@@ -14,27 +14,20 @@ colnames(lad_ppr) <- c("code", "name", "total", "variable")
 lad_ppr$z_ppr <- calc_z(lad_ppr)
 lad_ppr <- lad_ppr[, c("code", "name", "z_ppr")]
 
-stop()
-ten <- readr::read_csv("extdata/lad_ten.csv")
-ten <- ten[-nrow(ten), ]
-ten <- dplyr::select(ten, GEOGRAPHY_CODE, GEOGRAPHY_NAME, CELL_NAME, OBS_VALUE)
-ten <- tidyr::spread(ten, CELL_NAME, OBS_VALUE)
-ten[["pc_ten"]] <- ten[["Owned"]] / ten[["All households"]]
-ten[["pc_ten"]] <- ten[["pc_ten"]] * 100
-ten$z_ten <- scale(ten$pc_ten, scale = TRUE, center = TRUE)
-ten <- dplyr::select(ten, -3, -4, -5)
-colnames(ten) <- c("geo_code", "geo_name", "z_ten")
+lad_ten <- readr::read_csv("inst/extdata/lad_ten.csv")
+lad_ten <- prep_variable(lad_ten)
+colnames(lad_ten) <- c("code", "name", "total", "variable")
+lad_ten$z_ten <- calc_z(lad_ten)
+lad_ten <- lad_ten[, c("code", "name", "z_ten")]
 
-eau <- readr::read_csv("extdata/lad_eau.csv")
-eau <- eau[-nrow(eau), ]
-eau <- dplyr::select(eau, GEOGRAPHY_CODE, GEOGRAPHY_NAME, CELL_NAME, OBS_VALUE)
-eau <- tidyr::spread(eau, CELL_NAME, OBS_VALUE)
-eau[["pc_eau"]] <- eau[["Economically active: Unemployed"]] /
-  eau[["Economically active: Total"]]
-eau[["pc_eau"]] <- eau[["pc_eau"]] * 100
-eau$z_eau <- scale(eau$pc_eau, scale = TRUE, center = TRUE)
-eau <- dplyr::select(eau, -3, -4, -5)
-colnames(eau) <- c("geo_code", "geo_name", "z_eau")
+lad_eau <- readr::read_csv("inst/extdata/lad_eau.csv")
+lad_eau <- prep_variable(lad_eau)
+colnames(lad_eau) <- c("code", "name", "total", "variable")
+lad_eau$z_eau <- calc_z(lad_eau)
+lad_eau <- lad_eau[, c("code", "name", "z_eau")]
+
+
+
 
 lad_townsend <- dplyr::left_join(car, ppr, by = c("geo_code", "geo_name"))
 lad_townsend <- dplyr::left_join(lad_townsend, ten,
