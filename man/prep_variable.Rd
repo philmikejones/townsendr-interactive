@@ -13,7 +13,8 @@ prep_variable(var)
 Returns a (tidy) data frame
 }
 \description{
-Prepares Townsend variables from raw data obtained from Nomis web.
+Prepares Townsend variables from raw data obtained from Nomis web. Internal
+function.
 }
 \details{
 Removes last row if it contains NAs, removes unneeded columns, and spreads
