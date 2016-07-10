@@ -162,6 +162,12 @@ Source: CRAN
 Version: 1.0.0
 Hash: 77da8f1df873a4b91e5c4a68fe2fb1b6
 
+Package: purrr
+Source: CRAN
+Version: 0.2.2
+Hash: 2b1411c2e4c01eed69fb5ea3818a8d71
+Requires: BH, Rcpp, dplyr, lazyeval, magrittr
+
 Package: readr
 Source: CRAN
 Version: 0.2.2

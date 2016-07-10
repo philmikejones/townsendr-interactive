@@ -12,9 +12,8 @@ lad_ppr <- readr::read_csv("inst/extdata/lad_ppr.csv")
 colnames(lad_ppr)[20] <- "CELL_NAME"
 lad_ppr <- create_z(lad_ppr)
 
-
-
-
+dfs <- mget(objects())
+lad_index <- purrr::reduce(dfs, dplyr::inner_join, by = c("code", "name"))
 
 lad_townsend <- dplyr::left_join(car, ppr, by = c("geo_code", "geo_name"))
 lad_townsend <- dplyr::left_join(lad_townsend, ten,

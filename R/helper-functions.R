@@ -73,6 +73,7 @@ prep_variable <- function(var) {
 calc_z <- function(var, ...) {
   z <- var[["variable"]] / var[["total"]] * 100
   z <- scale(z, scale = TRUE, center = TRUE)
+  z <- as.vector(z)  # removes attributes
   z
 }
 
@@ -128,7 +129,9 @@ create_z <- function(var) {
   }
 
   colnames(var) <- c("code", "name", "total", "variable")
-  var$z_car     <- calc_z(var)
+  var[["z_"]]   <- calc_z(var)
+  stop("need to replace var (it's inputting the df)")
+  colnames(var) <- gsub("z_", paste0("z_", var), colnames(var))
   var           <- var[, grep("code|name|z_", colnames(var))]
 
   var
