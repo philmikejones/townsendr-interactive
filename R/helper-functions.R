@@ -21,7 +21,8 @@ get_shape <- function(url, destfile, exdir, ...) {
 
 #' prep_variable
 #'
-#' Prepares Townsend variables from raw data obtained from Nomis web.
+#' Prepares Townsend variables from raw data obtained from Nomis web. Internal
+#' function.
 #'
 #' Removes last row if it contains NAs, removes unneeded columns, and spreads
 #' the data to form a tidy data frame
@@ -101,8 +102,27 @@ calc_z <- function(var, ...) {
 #'
 #' @examples create_z(lad_car)
 create_z <- function(var) {
+  if (!is.data.frame(var)) {
+    var <- as.data.frame(var)
+    message(paste(var, "converted to data frame"))
+  }
+  if (!any(grepl("GEOGRAPHY_CODE", colnames(var)))) {
+    stop("No column called `GEOGRAPHY_CODE`")
+  }
+  if (!any(grepl("GEOGRAPHY_NAME", colnames(var)))) {
+    stop("No column called `GEOGRAPHY_NAME`")
+  }
+  if (!any(grepl("CELL_NAME", colnames(var)))) {
+    stop("No column called `CELL_NAME`")
+  }
+  if (!any(grepl("OBS_VALUE", colnames(var)))) {
+    stop("No column called `OBS_VALUE`")
+  }
+
   var           <- prep_variable(var)
   colnames(var) <- c("code", "name", "total", "variable")
   var$z_car     <- calc_z(var)
   var           <- var[, grep("code|name|z_", colnames(var))]
+
+  var
 }
