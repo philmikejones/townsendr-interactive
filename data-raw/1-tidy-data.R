@@ -10,18 +10,7 @@ lad_eau <- create_z(lad_eau)
 
 lad_ppr <- readr::read_csv("inst/extdata/lad_ppr.csv")
 colnames(lad_ppr)[20] <- "CELL_NAME"
-stop("dropping over 1.5 persons per room")
 lad_ppr <- create_z(lad_ppr)
-
-
-
-lad_ppr <- prep_variable(lad_ppr)
-lad_ppr$variable <- rowSums(lad_ppr[, 4:5])
-lad_ppr <- lad_ppr[, c(1:3, 6)]
-colnames(lad_ppr) <- c("code", "name", "total", "variable")
-lad_ppr$z_ppr <- calc_z(lad_ppr)
-lad_ppr <- lad_ppr[, c("code", "name", "z_ppr")]
-
 
 
 

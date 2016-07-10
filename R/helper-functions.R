@@ -119,7 +119,14 @@ create_z <- function(var) {
     stop("No column called `OBS_VALUE`")
   }
 
-  var           <- prep_variable(var)
+  var                        <- prep_variable(var)
+
+  if (ncol(var) > 4) {
+    colnames(var)[4:ncol(var)] <- "variable"
+    var[, 4]                   <- rowSums(var[, 4:ncol(var)])
+    var                        <- var[, 1:4]
+  }
+
   colnames(var) <- c("code", "name", "total", "variable")
   var$z_car     <- calc_z(var)
   var           <- var[, grep("code|name|z_", colnames(var))]
