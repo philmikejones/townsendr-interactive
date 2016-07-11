@@ -13,6 +13,8 @@
 #'
 #' @return Returns an unzipped shapefile
 #'
+#' @export
+#'
 #' @examples get_shape(shape_url, "inst/extdata/shape.zip", "inst/extdata")
 get_shape <- function(url, destfile, exdir, ...) {
   download.file(url, destfile = destfile, ...)
@@ -43,6 +45,8 @@ get_shape <- function(url, destfile, exdir, ...) {
 #'
 #' @seealso Nomis: \url{http://www.nomisweb.co.uk}
 #'
+#' @export
+#'
 #' @examples prep_variable(lad_car)  # where lad_car is a data frame object
 prep_variable <- function(var) {
   if (all(is.na(var[nrow(var), ]))) {  # test if last row is NA
@@ -68,6 +72,8 @@ prep_variable <- function(var) {
 #'
 #' @return Returns a vector with z scores calculated from called argument.
 #' Typically assigned to a new column from the original data frame.
+#'
+#' @export
 #'
 #' @examples calc_z(lad_car) Calculates z score for car ownership
 calc_z <- function(var, ...) {
@@ -101,6 +107,8 @@ calc_z <- function(var, ...) {
 #'
 #' @seealso Nomis web: \url{http://nomisweb.co.uk}
 #'
+#' @export
+#'
 #' @examples create_z(lad_car)
 create_z <- function(var) {
   if (!is.data.frame(var)) {
@@ -120,7 +128,7 @@ create_z <- function(var) {
     stop("No column called `OBS_VALUE`")
   }
 
-  var                        <- prep_variable(var)
+  var <- prep_variable(var)
 
   if (ncol(var) > 4) {
     colnames(var)[4:ncol(var)] <- "variable"
@@ -130,8 +138,6 @@ create_z <- function(var) {
 
   colnames(var) <- c("code", "name", "total", "variable")
   var[["z_"]]   <- calc_z(var)
-  stop("need to replace var (it's inputting the df)")
-  colnames(var) <- gsub("z_", paste0("z_", var), colnames(var))
   var           <- var[, grep("code|name|z_", colnames(var))]
 
   var

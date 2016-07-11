@@ -13,16 +13,19 @@ colnames(lad_ppr)[20] <- "CELL_NAME"
 lad_ppr <- create_z(lad_ppr)
 
 dfs <- mget(objects())
+rm(lad_car, lad_ten, lad_eau, lad_ppr)
 lad_index <- purrr::reduce(dfs, dplyr::inner_join, by = c("code", "name"))
 
-lad_townsend <- dplyr::left_join(car, ppr, by = c("geo_code", "geo_name"))
-lad_townsend <- dplyr::left_join(lad_townsend, ten,
-                                 by = c("geo_code", "geo_name"))
-lad_townsend <- dplyr::left_join(lad_townsend, eau,
-                                 by = c("geo_code", "geo_name"))
-rm(car, ppr, ten, eau)
+if (!assertthat::are_equal(nrow(dfs[[1]]), nrow(lad_index))) {
+  stop("Number of rows don't match")
+}
+rm(dfs)
 
-lad <- rgdal::readOGR(dsn = "extdata/lad", "england_lad_2011_gen")
+
+lad_shp <- rgdal::readOGR(dsn = "inst/extdata", "england_lad_2011_gen")
+stop("Loaded shapefile")
+
+
 for (i in seq_along(colnames(lad@data))) {
   lad@data[, i] <- as.character(lad@data[, i])
 }
