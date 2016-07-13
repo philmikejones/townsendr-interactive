@@ -29,7 +29,10 @@ eng_lad <- rgdal::readOGR(dsn = "inst/extdata", "england_lad_2011_gen",
                           stringsAsFactors = FALSE)
 wal_lad <- rgdal::readOGR(dsn = "inst/extdata", "wales_lad_2011_gen",
                           stringsAsFactors = FALSE)
+stop("Need to change IDs so they're unique")
+sp::spChFIDs()
 
+maptools::spRbind(eng_lad, wal_lad)
 
 
 dplyr::anti_join(lad_index, lad_shp@data, by = c("code" = "label"))
