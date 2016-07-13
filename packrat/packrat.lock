@@ -124,6 +124,12 @@ Source: CRAN
 Version: 1.5
 Hash: bdc4d48c3135e8f3b399536ddf160df4
 
+Package: maptools
+Source: CRAN
+Version: 0.8-39
+Hash: f88d489894305e514eacb380f4cb2008
+Requires: sp
+
 Package: memoise
 Source: CRAN
 Version: 1.0.0

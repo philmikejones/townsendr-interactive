@@ -16,13 +16,26 @@ dfs <- mget(objects())
 rm(lad_car, lad_ten, lad_eau, lad_ppr)
 lad_index <- purrr::reduce(dfs, dplyr::inner_join, by = c("code", "name"))
 
-if (!assertthat::are_equal(nrow(dfs[[1]]), nrow(lad_index))) {
+if (nrow(dfs[[1]]) != nrow(lad_index)) {
   stop("Number of rows don't match")
 }
 rm(dfs)
 
+lad_index$z <- rowSums(lad_index[, grep("z_", colnames(lad_index))])
+lad_index   <- lad_index[, c("code", "name", "z")]
 
-lad_shp <- rgdal::readOGR(dsn = "inst/extdata", "england_lad_2011_gen")
+# Load LAD shapefile
+eng_lad <- rgdal::readOGR(dsn = "inst/extdata", "england_lad_2011_gen",
+                          stringsAsFactors = FALSE)
+wal_lad <- rgdal::readOGR(dsn = "inst/extdata", "wales_lad_2011_gen",
+                          stringsAsFactors = FALSE)
+
+
+
+dplyr::anti_join(lad_index, lad_shp@data, by = c("code" = "label"))
+
+head(lad_shp@data)
+
 stop("Loaded shapefile")
 
 
