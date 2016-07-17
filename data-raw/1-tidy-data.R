@@ -41,6 +41,15 @@ if (!file.exists("inst/extdata/lad_2011_gen.shp")) {
 }
 
 lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen")
-
 lad_shp@data$altname <- NULL
+
+stop()
+gss_incorrect <- c("Northumberland", "St Albans", "Welwyn Hatfield",
+                   "East Hertfordshire", "Stevenage", "Gateshead")
+
+lad_index$code[lad_index$name == "Northumberland"] <-
+  lad_shp@data$label[lad_shp@data$name == "Northumberland"]
+
+
 joined <- dplyr::full_join(lad_shp@data, lad_index, by = c("label" = "code"))
+View(joined[is.na(joined$name.y), ])
