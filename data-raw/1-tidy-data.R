@@ -35,6 +35,10 @@ lapply(file_extensions, function(x) {
 rm(file_extensions)
 
 # Merge Wales into copy
-system("./data-raw/combine-shapefiles.sh")
+if (!file.exists("inst/extdata/lad_2011_gen.shp")) {
+  system("./data-raw/combine-shapefiles.sh")
+} else {
+  message("Merged shapefile exists")
+}
 
 lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen")
