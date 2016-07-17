@@ -33,15 +33,3 @@ wal_lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/",
                   "prebuilt/shape/Wales_lad_2011_gen.zip")
 get_shape(wal_lad, destfile = "inst/extdata/wal_lad.zip",
           exdir = "inst/extdata/", method = "wget")
-
-# Create a copy of england
-file_extensions <- list("dbf", "prj", "shp", "shx")
-lapply(file_extensions, function(x) {
-  file.copy(paste0("inst/extdata/england_lad_2011_gen.", x),
-            paste0("inst/extdata/lad_2011_gen.", x),
-            overwrite = TRUE)
-})
-rm(file_extensions)
-
-# Merge Wales into copy
-system("./data-raw/combine-shapefiles.sh")
