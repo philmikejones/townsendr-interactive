@@ -24,10 +24,23 @@ rm(dfs)
 lad_index$z <- rowSums(lad_index[, grep("z_", colnames(lad_index))])
 lad_index   <- lad_index[, c("code", "name", "z")]
 
-# Load LAD shapefile
-lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen",
-                          stringsAsFactors = FALSE)
+# Create a copy of england
+file_extensions <- list("dbf", "prj", "shp", "shx")
+lapply(file_extensions, function(x) {
+  file.copy(paste0("inst/extdata/england_lad_2011_gen.", x),
+            paste0("inst/extdata/lad_2011_gen.", x),
+            overwrite = TRUE)
+})
+rm(file_extensions)
+
+# Merge Wales into copy
+if (!file.exists("inst/extdata/lad_2011_gen.shp")) {
+  system("./data-raw/combine-shapefiles.sh")
+} else {
+  message("Merged shapefile exists")
+}
+
+lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen")
 
 lad_shp@data$altname <- NULL
-
 joined <- dplyr::full_join(lad_shp@data, lad_index, by = c("label" = "code"))
