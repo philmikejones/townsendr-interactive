@@ -25,4 +25,9 @@ lad_index$z <- rowSums(lad_index[, grep("z_", colnames(lad_index))])
 lad_index   <- lad_index[, c("code", "name", "z")]
 
 # Load LAD shapefile
-lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen")
+lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen",
+                          stringsAsFactors = FALSE)
+
+lad_shp@data$altname <- NULL
+
+joined <- dplyr::full_join(lad_shp@data, lad_index, by = c("label" = "code"))
