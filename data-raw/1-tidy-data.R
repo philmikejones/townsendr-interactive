@@ -42,17 +42,21 @@ if (!file.exists("inst/extdata/lad_2011_gen.shp")) {
 
 lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen",
                           stringsAsFactors = FALSE)
+
 lad_shp@data$altname <- NULL
 
 gss_incorrect <- list("Northumberland", "St Albans", "Welwyn Hatfield",
                       "East Hertfordshire", "Stevenage", "Gateshead")
-replacements <- lapply(gss_incorrect, function(x) {
-  replacements <- lad_shp@data$label[lad_shp@data$name == x]
 
-  replacements
+replacements <- lapply(gss_incorrect, function(x) {
+  lad_shp$label[lad_shp$name == x]
 })
 
-lad_index$code[lad_index$name == "Northumberland"]
+replacements <- data.frame(
+  as.character(replacements),
+  as.character(gss_incorrect)
+)
+
 
 
 
