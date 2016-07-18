@@ -12,6 +12,8 @@ lad_ppr <- readr::read_csv("inst/extdata/lad_ppr.csv")
 colnames(lad_ppr)[20] <- "CELL_NAME"
 lad_ppr <- create_z(lad_ppr)
 
+iIllegal01
+
 dfs <- mget(objects())
 rm(lad_car, lad_ten, lad_eau, lad_ppr)
 lad_index <- purrr::reduce(dfs, dplyr::inner_join, by = c("code", "name"))
