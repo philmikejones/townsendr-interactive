@@ -38,6 +38,11 @@ Source: CRAN
 Version: 0.1
 Hash: 0afb92b59b02593c70ff8046700ba9d3
 
+Package: boot
+Source: CRAN
+Version: 1.3-18
+Hash: 3f3516de42d575c03309e6aa2aea52aa
+
 Package: brew
 Source: CRAN
 Version: 1.0-6
