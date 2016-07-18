@@ -50,28 +50,8 @@ replacements <- dplyr::full_join(lad_shp@data, lad_index,
                                  by = c("label" = "code"))
 replacements <- replacements[is.na(replacements$name.y), ]
 
-stop("which lad_index$name match replacements$name.x")
-
-
-gss_incorrect <- list("Northumberland", "St Albans", "Welwyn Hatfield",
-                      "East Hertfordshire", "Stevenage", "Gateshead")
-
-replacements <- lapply(gss_incorrect, function(x) {
-  labels <- lad_shp$label[lad_shp$name == x]
-
-  labels
-})
-
-replacements <- data.frame(
-  data.frame(
-    unlist(replacements),
-    unlist(gss_incorrect),
-    stringsAsFactors = FALSE
-  )
-)
-
-
-
-
-joined <- dplyr::full_join(lad_shp@data, lad_index, by = c("label" = "code"))
-View(joined[is.na(joined$name.y), ])
+for (i in seq_along(replacements$name.x)) {
+  lad_index$code[lad_index$name == replacements$name.x[i]] <-
+    replacements$label[i]
+}
+rm(i)
