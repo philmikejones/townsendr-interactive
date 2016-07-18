@@ -1,5 +1,3 @@
-#' @import maptools
-
 #' get_shape
 #'
 #' Internal (not exported) function for obtaining and unziping shapefiles,

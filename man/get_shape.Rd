@@ -2,6 +2,7 @@
 % Please edit documentation in R/helper-functions.R
 \name{get_shape}
 \alias{get_shape}
+\title{get_shape}
 \usage{
 get_shape(url, destfile, exdir, ...)
 }
@@ -16,6 +17,14 @@ get_shape(url, destfile, exdir, ...)
 }
 \value{
 Returns an unzipped shapefile
+}
+\description{
+Internal (not exported) function for obtaining and unziping shapefiles,
+typically from edina.ac.uk
+}
+\details{
+Typically used with `create_z()` function. Call for its side effects; i.e.
+does not need to be assigned (`<-`)
 }
 \examples{
 get_shape(shape_url, "inst/extdata/shape.zip", "inst/extdata")
