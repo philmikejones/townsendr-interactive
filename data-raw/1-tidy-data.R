@@ -40,15 +40,20 @@ if (!file.exists("inst/extdata/lad_2011_gen.shp")) {
   message("Merged shapefile exists")
 }
 
-lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen")
+lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen",
+                          stringsAsFactors = FALSE)
 lad_shp@data$altname <- NULL
 
-stop()
-gss_incorrect <- c("Northumberland", "St Albans", "Welwyn Hatfield",
-                   "East Hertfordshire", "Stevenage", "Gateshead")
+gss_incorrect <- list("Northumberland", "St Albans", "Welwyn Hatfield",
+                      "East Hertfordshire", "Stevenage", "Gateshead")
+replacements <- lapply(gss_incorrect, function(x) {
+  replacements <- lad_shp@data$label[lad_shp@data$name == x]
 
-lad_index$code[lad_index$name == "Northumberland"] <-
-  lad_shp@data$label[lad_shp@data$name == "Northumberland"]
+  replacements
+})
+
+lad_index$code[lad_index$name == "Northumberland"]
+
 
 
 joined <- dplyr::full_join(lad_shp@data, lad_index, by = c("label" = "code"))
