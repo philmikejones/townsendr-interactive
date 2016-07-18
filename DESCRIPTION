@@ -15,7 +15,9 @@ BugReports: https://github.com/philmikejones/townsendr/issues
 Suggests:
     readr,
     downloader,
-    tidyr
+    tidyr,
+    dplyr
 RoxygenNote: 5.0.1
 Imports: dplyr,
-    rgdal
+    rgdal,
+    rgeos

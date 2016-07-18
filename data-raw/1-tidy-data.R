@@ -1,3 +1,5 @@
+library("maptools")
+
 # LADs ====
 lad_car <- readr::read_csv("inst/extdata/lad_car.csv")
 lad_car <- create_z(lad_car)
@@ -61,4 +63,4 @@ if (nrow(lad_index) != nrow(lad_shp)) {
 }
 
 # Tidy for ggplot
-broom::tidy(lad_shp, region = "label")
+lad_index_f <- broom::tidy(lad_shp, region = "label")
