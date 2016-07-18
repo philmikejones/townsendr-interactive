@@ -34,11 +34,7 @@ lapply(file_extensions, function(x) {
 rm(file_extensions)
 
 # Merge Wales into copy
-if (!file.exists("inst/extdata/lad_2011_gen.shp")) {
-  system("./data-raw/combine-shapefiles.sh")
-} else {
-  message("Merged shapefile exists")
-}
+system("./data-raw/combine-shapefiles.sh")
 
 # Load shape and drop unneeded variables
 lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen",
@@ -55,3 +51,10 @@ for (i in seq_along(replacements$name.x)) {
     replacements$label[i]
 }
 rm(i)
+rm(replacements)
+
+lad_shp@data <- dplyr::inner_join(lad_shp@data, lad_index,
+                                  by = c("label" = "code"))
+if (nrow(lad_index) != nrow(lad_shp)) {
+  stop("Error in shapefile join. nrows do not match")
+}
