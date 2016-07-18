@@ -60,4 +60,4 @@ if (nrow(lad_index) != nrow(lad_shp)) {
   stop("Error in shapefile join, nrows do not match")
 }
 
-
+broom::tidy()
