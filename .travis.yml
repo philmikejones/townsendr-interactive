@@ -1,2 +1,7 @@
 language: r
 cache: packages
+addons:
+  apt:
+    packages:
+      - libssl-dev
+      
