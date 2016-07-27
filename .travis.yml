@@ -4,4 +4,6 @@ addons:
   apt:
     packages:
       - libssl-dev
+      - libgdal1-dev
+      - libproj-dev
       
