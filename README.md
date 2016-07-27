@@ -1,4 +1,6 @@
+[![Build Status](https://travis-ci.org/philmikejones/townsendr.svg?branch=master)](https://travis-ci.org/philmikejones/townsendr)
 [![Coverage Status](https://coveralls.io/repos/github/philmikejones/townsendr/badge.svg?branch=master)](https://coveralls.io/github/philmikejones/townsendr?branch=master)
+
 
 License
 =======
