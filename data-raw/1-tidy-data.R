@@ -64,3 +64,8 @@ if (nrow(lad_index) != nrow(lad_shp)) {
 
 # Tidy for ggplot
 lad_index_f <- broom::tidy(lad_shp, region = "label")
+lad_index_f <- dplyr::inner_join(lad_index_f, lad_shp@data,
+                                 by = c("id" = "label"))
+
+# Write out fortified data frame
+save(lad_index_f, file = "data/lad.RData")
