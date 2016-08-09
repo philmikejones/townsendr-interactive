@@ -4,3 +4,9 @@
 ^\.Rprofile$
 ^data-raw$
 .travis.yml
+^.*.csv
+^.*.zip
+^.*.dbf
+^.*.prj
+^.*.shp
+^.*.shx
