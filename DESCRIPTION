@@ -16,10 +16,10 @@ Suggests:
     readr,
     downloader,
     tidyr,
-    dplyr
-RoxygenNote: 5.0.1
-Imports: dplyr,
-    rgdal,
-    rgeos,
-    maptools,
+    dplyr,
     ggplot2
+RoxygenNote: 5.0.1
+Imports: sp,
+    maptools,
+    rgdal,
+    rgeos
