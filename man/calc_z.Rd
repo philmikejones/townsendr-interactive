@@ -21,6 +21,7 @@ Calculates the z score of a given data frame column. Internal function
 which is usually called as part of `create_z` function.
 }
 \examples{
-calc_z(lad_car) Calculates z score for car ownership
+## not run
+## calc_z(lad_car)  Calculates z score for car ownership
 }
 

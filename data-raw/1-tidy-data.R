@@ -1,5 +1,3 @@
-library("maptools")
-
 # LADs ====
 lad_car <- readr::read_csv("inst/extdata/lad_car.csv")
 lad_car <- create_z(lad_car)
@@ -62,7 +60,7 @@ if (nrow(lad_index) != nrow(lad_shp)) {
   stop("Error in shapefile join, nrows do not match")
 }
 
-# Tidy for ggplot
+# Tidy for ggplots
 lad_index_f <- broom::tidy(lad_shp, region = "label")
 lad_index_f <- dplyr::inner_join(lad_index_f, lad_shp@data,
                                  by = c("id" = "label"))

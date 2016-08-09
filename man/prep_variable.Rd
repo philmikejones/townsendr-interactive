@@ -31,7 +31,8 @@ be present and are silently dropped):
 Data frames in this format can be obtained from Nomis
 }
 \examples{
-prep_variable(lad_car)  # where lad_car is a data frame object
+## not run
+## prep_variable(lad_car)  where lad_car is a data frame object
 }
 \seealso{
 Nomis: \url{http://www.nomisweb.co.uk}

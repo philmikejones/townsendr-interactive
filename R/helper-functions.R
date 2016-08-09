@@ -20,7 +20,8 @@ if(getRversion() >= "2.15.1")
 #'
 #' @export
 #'
-#' @examples get_shape(shape_url, "inst/extdata/shape.zip", "inst/extdata")
+#' @examples ## not run
+#' ## get_shape(shape_url, "inst/extdata/shape.zip", "inst/extdata")
 get_shape <- function(url, destfile, exdir, ...) {
   utils::download.file(url, destfile = destfile, ...)
   utils::unzip(destfile, exdir = exdir)
@@ -52,7 +53,8 @@ get_shape <- function(url, destfile, exdir, ...) {
 #'
 #' @export
 #'
-#' @examples prep_variable(lad_car)  # where lad_car is a data frame object
+#' @examples ## not run
+#' ## prep_variable(lad_car)  where lad_car is a data frame object
 prep_variable <- function(var) {
   if (all(is.na(var[nrow(var), ]))) {  # test if last row is NA
     var <- var[-nrow(var), , drop = FALSE]  # remove last row containing NAs
@@ -80,7 +82,8 @@ prep_variable <- function(var) {
 #'
 #' @export
 #'
-#' @examples calc_z(lad_car) Calculates z score for car ownership
+#' @examples ## not run
+#' ## calc_z(lad_car)  Calculates z score for car ownership
 calc_z <- function(var, ...) {
   z <- var[["variable"]] / var[["total"]] * 100
   z <- scale(z, scale = TRUE, center = TRUE)
@@ -114,7 +117,8 @@ calc_z <- function(var, ...) {
 #'
 #' @export
 #'
-#' @examples create_z(lad_car)
+#' @examples ## not run
+#' ## create_z(lad_car)
 create_z <- function(var) {
   if (!is.data.frame(var)) {
     var <- as.data.frame(var)

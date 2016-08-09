@@ -31,7 +31,8 @@ Expects at least the following columns (other columns are silenty dropped):
 Data frames of this specific format can be obtained from Nomis Web.
 }
 \examples{
-create_z(lad_car)
+## not run
+## create_z(lad_car)
 }
 \seealso{
 Nomis web: \url{http://nomisweb.co.uk}

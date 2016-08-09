@@ -27,6 +27,7 @@ Typically used with `create_z()` function. Call for its side effects; i.e.
 does not need to be assigned (`<-`)
 }
 \examples{
-get_shape(shape_url, "inst/extdata/shape.zip", "inst/extdata")
+## not run
+## get_shape(shape_url, "inst/extdata/shape.zip", "inst/extdata")
 }
 
