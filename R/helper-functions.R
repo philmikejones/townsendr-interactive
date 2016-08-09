@@ -1,3 +1,8 @@
+# The following is needed to get variables working with CMD CHECK
+# See http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
+if(getRversion() >= "2.15.1")
+  utils::globalVariables(c("CELL_NAME", "OBS_VALUE"))
+
 #' get_shape
 #'
 #' Internal (not exported) function for obtaining and unziping shapefiles,
