@@ -24,3 +24,4 @@ Imports: sp,
     maptools,
     rgdal,
     rgeos
+LazyData: true
