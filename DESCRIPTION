@@ -10,7 +10,7 @@ Depends:
     R (>= 3.2.0)
 Description: Calculates the Townsend Material Deprivation Index for requested
     geographical areas in the UK.
-License: GPL (>= 3)
+License: GPL (>= 3) + file LICENSE
 BugReports: https://github.com/philmikejones/townsendr/issues
 Suggests:
     readr,
