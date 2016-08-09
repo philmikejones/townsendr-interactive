@@ -17,8 +17,8 @@
 #'
 #' @examples get_shape(shape_url, "inst/extdata/shape.zip", "inst/extdata")
 get_shape <- function(url, destfile, exdir, ...) {
-  download.file(url, destfile = destfile, ...)
-  unzip(destfile, exdir = exdir)
+  utils::download.file(url, destfile = destfile, ...)
+  utils::unzip(destfile, exdir = exdir)
 }
 
 #' prep_variable
