@@ -18,7 +18,8 @@ Suggests:
     tidyr,
     dplyr,
     ggplot2,
-    utils
+    utils,
+    testthat
 RoxygenNote: 5.0.1
 Imports: sp,
     maptools,
