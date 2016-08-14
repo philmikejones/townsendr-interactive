@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/philmikejones/townsendr.svg?branch=master)](https://travis-ci.org/philmikejones/townsendr)
-[![codecov](https://codecov.io/gh/philmikejones/townsendr/branch/master/graph/badge.svg)](https://codecov.io/gh/philmikejones/townsendr)
-
 
 Introduction
 ============
@@ -25,15 +22,6 @@ script uses data from England and Wales (Scotland and Northern Ireland tables
 were not available at the time of publication (February 2014)). Thus, the scores
 reflect the relative deprivation of an area based on similar areas in England
 and Wales.
-
-
-Installing the package
-======================
-
-```r
-# install.packages("devtools")
-devtools::install_github("philmikejones/townsendr")
-```
 
 
 License
