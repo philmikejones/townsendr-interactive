@@ -1,15 +1,19 @@
 
-library(shiny)
+library("shiny")
+library("ggplot2")
 
-map_lad <- readRDS("data/townsend_lad.rds")
+map = readRDS("data/townsend_lad.rds")
 
 shinyServer(function(input, output) {
 
-  output$townsend <- renderPlot({
+  townsend_lad <- function() {
 
-    polygon(map_lad, aes(long, lat, group = group), fill = NA, colour = "red") +
+    ggplot() + geom_polygon(data = map, aes(long, lat, group = group, fill = z),
+                            colour = "black") +
       coord_equal()
 
-  })
+  }
+
+  output$map <- renderPlot({ townsend_lad() }, height = 700)
 
 })
