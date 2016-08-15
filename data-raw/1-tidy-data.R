@@ -95,11 +95,13 @@ if (nrow(lad) != nrow(lad_car)) {
 rm(lad_car, lad_eau, lad_ppr, lad_ten)
 
 
+# Sum z-scores ====
+lad$z <- rowSums(lad[, grep("z_", colnames(lad))])
 
-lad_index$z <- rowSums(lad_index[, grep("z_", colnames(lad_index))])
-lad_index   <- lad_index[, c("code", "name", "z")]
 
-# Create a copy of england
+# Add z-scores to shapefile ====
+
+# Create a copy of england, call it lad
 file_extensions <- list("dbf", "prj", "shp", "shx")
 lapply(file_extensions, function(x) {
   file.copy(paste0("inst/extdata/england_lad_2011_gen.", x),
@@ -108,7 +110,7 @@ lapply(file_extensions, function(x) {
 })
 rm(file_extensions)
 
-# Merge Wales into copy
+# Merge Wales into lad_
 system("./data-raw/combine-shapefiles.sh")
 
 # Load shape and drop unneeded variables
@@ -116,22 +118,25 @@ lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen",
                           stringsAsFactors = FALSE)
 lad_shp@data <- dplyr::select(lad_shp@data, -altname, -oldlabel)
 
-# Find unmatched codes
-replacements <- dplyr::full_join(lad_shp@data, lad_index,
-                                 by = c("label" = "code"))
-replacements <- replacements[is.na(replacements$name.y), ]
 
-for (i in seq_along(replacements$name.x)) {
-  lad_index$code[lad_index$name == replacements$name.x[i]] <-
+stop()
+
+# Find unmatched codes
+replacements <- dplyr::full_join(lad_shp@data, lad,
+                                 by = c("label" = "GEOGRAPHY_CODE"))
+replacements <- replacements[is.na(replacements$GEOGRAPHY_NAME), ]
+
+for (i in seq_along(replacements$GEOGRAPHY_NAME)) {
+  lad$code[lad$name == replacements$GEOGRAPHY_NAME[i]] <-
     replacements$label[i]
 }
 rm(i)
 rm(replacements)
 
-lad_shp@data <- dplyr::inner_join(lad_shp@data, lad_index,
+lad_shp@data <- dplyr::inner_join(lad_shp@data, lad,
                                   by = c("label" = "code"))
 
-if (nrow(lad_index) != nrow(lad_shp)) {
+if (nrow(lad) != nrow(lad_shp)) {
   stop("Error in shapefile join, nrows do not match")
 }
 
