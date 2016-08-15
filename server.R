@@ -14,6 +14,9 @@ shinyServer(function(input, output) {
 
   }
 
-  output$map <- renderPlot({ townsend_lad() }, height = 700)
+  output$map  <- renderPlot({ townsend_lad() })
+  output$info <- renderText({
+    paste0("x = ", input$plot_hover$x, "\ny = ", input$plot_hover$y)
+  })
 
 })

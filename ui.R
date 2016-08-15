@@ -7,7 +7,8 @@ shinyUI(fluidPage(
   titlePanel("Townsend Material Deprivation Score"),
 
     mainPanel(
-      plotOutput('map', width = "100%")
+      plotOutput('map', hover = "plot_hover"),
+      verbatimTextOutput("info")
     )
 
 ))
