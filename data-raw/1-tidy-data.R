@@ -63,9 +63,16 @@ lad_ppr <- tidy_nomis(lad_ppr)
 
 # Calculate z-scores ====
 lad_car$z_car <- scale(lad_car[4] / lad_car[3])
+attributes(lad_car$z_car) <- NULL
+
 lad_ten$z_ten <- scale(lad_ten[4] / lad_ten[3])
+attributes(lad_ten$z_ten) <- NULL
+
 lad_eau$z_eau <- scale(lad_eau[4] / lad_ten[3])
+attributes(lad_eau$z_eau) <- NULL
+
 lad_ppr$z_ppr <- scale(rowSums(lad_ppr[, 4:5]) / lad_ppr[3])
+attributes(lad_ppr$z_ppr) <- NULL
 
 
 # Join ====
@@ -75,18 +82,19 @@ lad_ten <- lad_ten %>% select(GEOGRAPHY_CODE, GEOGRAPHY_NAME, z_ten)
 lad_eau <- lad_eau %>% select(GEOGRAPHY_CODE, GEOGRAPHY_NAME, z_eau)
 lad_ppr <- lad_ppr %>% select(GEOGRAPHY_CODE, GEOGRAPHY_NAME, z_ppr)
 
-str(lad_car)
+# inner_join
+lad <- lad_car %>%
+  inner_join(lad_ten) %>%
+  inner_join(lad_eau) %>%
+  inner_join(lad_ppr)
 
-
-
-dfs <- mget(objects())
-rm(lad_car, lad_ten, lad_eau, lad_ppr)
-lad_index <- purrr::reduce(dfs, dplyr::inner_join, by = c("code", "name"))
-
-if (nrow(dfs[[1]]) != nrow(lad_index)) {
+# Check nrows match
+if (nrow(lad) != nrow(lad_car)) {
   stop("Number of rows don't match")
 }
-rm(dfs)
+rm(lad_car, lad_eau, lad_ppr, lad_ten)
+
+
 
 lad_index$z <- rowSums(lad_index[, grep("z_", colnames(lad_index))])
 lad_index   <- lad_index[, c("code", "name", "z")]
