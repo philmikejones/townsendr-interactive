@@ -26,11 +26,16 @@ rm(lad_car, lad_eau, lad_ppr, lad_ten)
 
 
 # Shapefiles ====
-end_lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/",
+
+# method = "wget" necessary because edina.ac.uk doesn't return HEAD
+# See https://github.com/wch/downloader/issues/8
+
+eng_lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/",
                   "prebuilt/shape/England_lad_2011_gen.zip")
-get_shape(end_lad, destfile = "inst/extdata/end_lad.zip",
-          exdir = "inst/extdata/", method = "wget")
+utils::download.file(eng_lad, "inst/extdata/eng_lad.zip", method = "wget")
+utils::unzip("inst/extdata/eng_lad.zip", exdir = "inst/extdata")
+
 wal_lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/",
                   "prebuilt/shape/Wales_lad_2011_gen.zip")
-get_shape(wal_lad, destfile = "inst/extdata/wal_lad.zip",
-          exdir = "inst/extdata/", method = "wget")
+utils::download.file(wal_lad, "inst/extdata/wal_lad.zip", method = "wget")
+utils::unzip("inst/extdata/wal_lad.zip", exdir = "inst/extdata")

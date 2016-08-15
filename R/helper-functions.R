@@ -1,31 +1,9 @@
+
 # The following is needed to get variables working with CMD CHECK
 # See http://stackoverflow.com/questions/9439256/how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
 if(getRversion() >= "2.15.1")
   utils::globalVariables(c("CELL_NAME", "OBS_VALUE"))
 
-#' get_shape
-#'
-#' Internal (not exported) function for obtaining and unziping shapefiles,
-#' typically from edina.ac.uk
-#'
-#' Typically used with `create_z()` function. Call for its side effects; i.e.
-#' does not need to be assigned (`<-`)
-#'
-#' @param url URL to obtain the shapefile from
-#' @param destfile destination to download the zip archive to
-#' @param exdir destination to unzip the shapefiles to
-#' @param ... extra arguments to pass to download.file (i.e. method = "wget")
-#'
-#' @return Returns an unzipped shapefile
-#'
-#' @export
-#'
-#' @examples ## not run
-#' ## get_shape(shape_url, "inst/extdata/shape.zip", "inst/extdata")
-get_shape <- function(url, destfile, exdir, ...) {
-  utils::download.file(url, destfile = destfile, ...)
-  utils::unzip(destfile, exdir = exdir)
-}
 
 #' prep_variable
 #'
