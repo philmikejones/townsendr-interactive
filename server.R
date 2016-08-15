@@ -1,6 +1,8 @@
 
 library("shiny")
 library("ggplot2")
+library("magrittr")
+library("dplyr")
 
 map = readRDS("data/townsend_lad.rds")
 
@@ -15,8 +17,13 @@ shinyServer(function(input, output) {
   }
 
   output$map  <- renderPlot({ townsend_lad() })
-  output$info <- renderText({
-    paste0("x = ", input$plot_hover$x, "\ny = ", input$plot_hover$y)
+
+  output$info <- renderPrint({
+
+    nearPoints(map, input$plot_hover) %>%
+      select(id, z, name) %>%
+      unique()
+
   })
 
 })
