@@ -33,41 +33,20 @@ if(getRversion() >= "2.15.1")
 #'
 #' @examples ## not run
 #' ## prep_variable(lad_car)  where lad_car is a data frame object
-prep_variable <- function(var) {
-  if (all(is.na(var[nrow(var), ]))) {  # test if last row is NA
-    var <- var[-nrow(var), , drop = FALSE]  # remove last row containing NAs
-  }
-  var <- var[, c("GEOGRAPHY_CODE", "GEOGRAPHY_NAME", "CELL_NAME",
-                 "OBS_VALUE"), drop = FALSE]
-  var <- tidyr::spread(var, CELL_NAME, OBS_VALUE)
-  var <- as.data.frame(var)
 
-  var
+var <- prep_variable(var)
 
+if (ncol(var) > 4) {
+  colnames(var)[4:ncol(var)] <- "variable"
+  var[, 4]                   <- rowSums(var[, 4:ncol(var)])
+  var                        <- var[, 1:4]
 }
 
-#' calc_z
-#'
-#' Calculates the z score of a given data frame column. Internal function
-#' which is usually called as part of `create_z` function.
-#'
-#' @param var Variable to scale (create z score)
-#' @param ... additional arguments to pass to scale() (e.g. to change default
-#' behaviour of scale and center arguments)
-#'
-#' @return Returns a vector with z scores calculated from called argument.
-#' Typically assigned to a new column from the original data frame.
-#'
-#' @export
-#'
-#' @examples ## not run
-#' ## calc_z(lad_car)  Calculates z score for car ownership
-calc_z <- function(var, ...) {
-  z <- var[["variable"]] / var[["total"]] * 100
-  z <- scale(z, scale = TRUE, center = TRUE)
-  z <- as.vector(z)  # removes attributes
-  z
-}
+colnames(var) <- c("code", "name", "total", "variable")
+var[["z_"]]   <- calc_z(var)
+var           <- var[, grep("code|name|z_", colnames(var))]
+
+var
 
 #' create_z
 #'
@@ -129,3 +108,30 @@ create_z <- function(var) {
 
   var
 }
+
+
+
+
+#' calc_z
+#'
+#' Calculates the z score of a given data frame column. Internal function
+#' which is usually called as part of `create_z` function.
+#'
+#' @param var Variable to scale (create z score)
+#' @param ... additional arguments to pass to scale() (e.g. to change default
+#' behaviour of scale and center arguments)
+#'
+#' @return Returns a vector with z scores calculated from called argument.
+#' Typically assigned to a new column from the original data frame.
+#'
+#' @export
+#'
+#' @examples ## not run
+#' ## calc_z(lad_car)  Calculates z score for car ownership
+calc_z <- function(var, ...) {
+  z <- var[["variable"]] / var[["total"]] * 100
+  z <- scale(z, scale = TRUE, center = TRUE)
+  z <- as.vector(z)  # removes attributes
+  z
+}
+
