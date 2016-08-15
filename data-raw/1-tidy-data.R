@@ -1,5 +1,7 @@
 # Packages ====
 library("tidyr")
+library("dplyr")
+library("magrittr")
 
 
 # Functions ====
@@ -57,6 +59,23 @@ lad_car <- tidy_nomis(lad_car)
 lad_ten <- tidy_nomis(lad_ten)
 lad_eau <- tidy_nomis(lad_eau)
 lad_ppr <- tidy_nomis(lad_ppr)
+
+
+# Calculate z-scores ====
+lad_car$z_car <- scale(lad_car[4] / lad_car[3])
+lad_ten$z_ten <- scale(lad_ten[4] / lad_ten[3])
+lad_eau$z_eau <- scale(lad_eau[4] / lad_ten[3])
+lad_ppr$z_ppr <- scale(rowSums(lad_ppr[, 4:5]) / lad_ppr[3])
+
+
+# Join ====
+# Select columns
+lad_car <- lad_car %>% select(GEOGRAPHY_CODE, GEOGRAPHY_NAME, z_car)
+lad_ten <- lad_ten %>% select(GEOGRAPHY_CODE, GEOGRAPHY_NAME, z_ten)
+lad_eau <- lad_eau %>% select(GEOGRAPHY_CODE, GEOGRAPHY_NAME, z_eau)
+lad_ppr <- lad_ppr %>% select(GEOGRAPHY_CODE, GEOGRAPHY_NAME, z_ppr)
+
+str(lad_car)
 
 
 
