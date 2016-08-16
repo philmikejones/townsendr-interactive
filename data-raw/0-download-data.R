@@ -29,7 +29,6 @@ rm(lad_car, lad_eau, lad_ppr, lad_ten)
 
 # method = "wget" necessary because edina.ac.uk doesn't return HEAD
 # See https://github.com/wch/downloader/issues/8
-
 eng_lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/",
                   "prebuilt/shape/England_lad_2011_gen.zip")
 utils::download.file(eng_lad, "inst/extdata/eng_lad.zip", method = "wget")
@@ -39,3 +38,15 @@ wal_lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/",
                   "prebuilt/shape/Wales_lad_2011_gen.zip")
 utils::download.file(wal_lad, "inst/extdata/wal_lad.zip", method = "wget")
 utils::unzip("inst/extdata/wal_lad.zip", exdir = "inst/extdata")
+
+# Create a copy of england, call it lad
+file_extensions <- list("dbf", "prj", "shp", "shx")
+lapply(file_extensions, function(x) {
+  file.copy(paste0("inst/extdata/england_lad_2011_gen.", x),
+            paste0("inst/extdata/lad_2011_gen.", x),
+            overwrite = TRUE)
+})
+rm(file_extensions)
+
+# Merge Wales into lad_
+system("./data-raw/combine-shapefiles.sh")

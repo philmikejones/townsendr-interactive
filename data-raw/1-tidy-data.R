@@ -100,19 +100,6 @@ lad$z <- rowSums(lad[, grep("z_", colnames(lad))])
 
 
 # Add z-scores to shapefile ====
-
-# Create a copy of england, call it lad
-file_extensions <- list("dbf", "prj", "shp", "shx")
-lapply(file_extensions, function(x) {
-  file.copy(paste0("inst/extdata/england_lad_2011_gen.", x),
-            paste0("inst/extdata/lad_2011_gen.", x),
-            overwrite = TRUE)
-})
-rm(file_extensions)
-
-# Merge Wales into lad_
-system("./data-raw/combine-shapefiles.sh")
-
 # Load shape and drop unneeded variables
 lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen",
                           stringsAsFactors = FALSE)
