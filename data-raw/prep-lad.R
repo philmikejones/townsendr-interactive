@@ -10,7 +10,6 @@ library("tidyr")
 library("dplyr")
 library("magrittr")
 library("rgdal")
-library("raster")
 library("RQGIS"); my_env <- set_env("/usr")
 
 
@@ -86,27 +85,45 @@ lad_ten <- lad_ten %>% select(GEOGRAPHY_CODE, GEOGRAPHY_NAME, z_ten)
 lad_eau <- lad_eau %>% select(GEOGRAPHY_CODE, GEOGRAPHY_NAME, z_eau)
 lad_ppr <- lad_ppr %>% select(GEOGRAPHY_CODE, GEOGRAPHY_NAME, z_ppr)
 
-lad <- lad_car %>%
+lad_score <- lad_car %>%
   inner_join(lad_ten) %>%
   inner_join(lad_eau) %>%
   inner_join(lad_ppr)
 
-if (nrow(lad) != nrow(lad_car)) {
+if (nrow(lad_score) != nrow(lad_car)) {
   stop("Number of rows don't match")
 }
 rm(lad_car, lad_eau, lad_ppr, lad_ten)
 
 
-lad$z <- rowSums(lad[, grep("z_", colnames(lad))])
+lad_score$z <- rowSums(lad_score[, grep("z_", colnames(lad_score))])
 
 
-stop()
+eng_lad <- readOGR("inst/extdata", "england_lad_2011_gen",
+                   stringsAsFactors = FALSE)
+wal_lad <- readOGR("inst/extdata", "wales_lad_2011_gen",
+                   stringsAsFactors = FALSE)
+
+# Currently IDs overlap between Wales and England. Ensure unique ID for merge
+spChFIDs(eng_lad) <- as.character(1:nrow(eng_lad@data))
+
+wal_min <- nrow(eng_lad) + 1
+wal_max <- nrow(eng_lad) + nrow(wal_lad)
+stopifnot(
+  all.equal(nrow(wal_lad) + nrow(eng_lad), wal_max)
+)
+spChFIDs(wal_lad) <- as.character(wal_min:wal_max)
+
+lad_shp <- rbind(eng_lad, wal_lad)
+rm(eng_lad, wal_lad)
+
+lad_shp@data <- dplyr::select(lad_shp@data, -altname, -oldlabel)
+
+
 
 # #! /bin/bash
 #
-# ogr2ogr -update -append -f 'ESRI Shapefile' \
-# inst/extdata/lad_2011_gen.shp \
-# inst/extdata/wales_lad_2011_gen.shp
+#
 #
 # ogr2ogr -simplify 100 -f 'ESRI Shapefile' \
 # inst/extdata/lad_2011_simp.shp         \
@@ -114,10 +131,7 @@ stop()
 
 
 
-eng_lad <- readOGR("inst/extdata", "england_lad_2011_gen")
-wal_lad <- readOGR("inst/extdata", "wales_lad_2011_gen")
 
-lad_shp <- raster::union(eng_lad, wal_lad)
 
 
 params <- get_args_man(alg = "qgis:mergevectorlayers", qgis_env = my_env)
@@ -128,13 +142,9 @@ run_qgis(alg = "qgis:mergevectorlayers", params = params, qgis_env = my_env)
 get_usage(alg = "qgis:mergevectorlayers", qgis_env = my_env, intern = TRUE)
 
 
-
-
 # Add z-scores to shapefile ====
 # Load shape and drop unneeded variables
-lad_shp <- rgdal::readOGR("inst/extdata", "lad_2011_gen",
-                          stringsAsFactors = FALSE)
-lad_shp@data <- dplyr::select(lad_shp@data, -altname, -oldlabel)
+
 
 
 stop()
