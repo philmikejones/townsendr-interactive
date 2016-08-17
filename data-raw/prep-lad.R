@@ -97,43 +97,9 @@ rm(lad_car, lad_eau, lad_ppr, lad_ten)
 
 
 lad$z <- rowSums(lad[, grep("z_", colnames(lad))])
-stop()
 
-get_usage(alg = "qgis:mergevectorlayers", qgis_env = my_env, intern = TRUE)
-
-params <- get_args_man(alg = "qgis:mergevectorlayers", qgis_env = my_env)
-params$LAYERS <- c("inst/extdata/shapefiles/england_lad_2011_gen.shp",
-                   "inst/extdata/shapefiles/wales_lad_2011_gen.shp")
-params$OUTPUT <- "inst/extdata/test.shp"
-
-out <- run_qgis(alg = "qgis:mergevectorlayers", params = params, qgis_env = my_env)
-
-info <- qgis_session_info()
-info$supported_saga_versions
 
 stop()
-
-
-
-
-
-
-
-
-
-
-
-# Create a copy of england, call it lad
-file_extensions <- list("dbf", "prj", "shp", "shx")
-lapply(file_extensions, function(x) {
-  file.copy(paste0("inst/extdata/england_lad_2011_gen.", x),
-            paste0("inst/extdata/lad_2011_gen.", x),
-            overwrite = TRUE)
-})
-rm(file_extensions)
-
-# Merge Wales into lad_
-system("./data-raw/combine-shapefiles.sh")
 
 # #! /bin/bash
 #
@@ -144,6 +110,20 @@ system("./data-raw/combine-shapefiles.sh")
 # ogr2ogr -simplify 100 -f 'ESRI Shapefile' \
 # inst/extdata/lad_2011_simp.shp         \
 # inst/extdata/lad_2011_gen.shp
+
+
+
+eng_lad <- readOGR("inst/extdata", "england_lad_2011_gen")
+wal_lad <- readOGR("inst/extdata", "wales_lad_2011_gen")
+
+params <- get_args_man(alg = "qgis:mergevectorlayers", qgis_env = my_env)
+params$LAYERS <- c(eng_lad, wal_lad)
+params$OUTPUT <- file.path(file.path(getwd(), "inst/extdata/"), "test.shp")
+run_qgis(alg = "qgis:mergevectorlayers", params = params, qgis_env = my_env)
+
+get_usage(alg = "qgis:mergevectorlayers", qgis_env = my_env, intern = TRUE)
+
+
 
 
 # Add z-scores to shapefile ====
