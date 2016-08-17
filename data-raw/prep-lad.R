@@ -11,7 +11,6 @@ library("magrittr")
 library("dplyr")
 library("rgdal")
 library("rmapshaper")
-library("RQGIS"); my_env <- set_env("/usr")
 
 
 # Functions ====
@@ -113,6 +112,7 @@ wal_max <- nrow(eng_lad) + nrow(wal_lad)
 stopifnot(
   all.equal(nrow(wal_lad) + nrow(eng_lad), wal_max)
 )
+
 spChFIDs(wal_lad) <- as.character(wal_min:wal_max)
 rm(wal_max, wal_min)
 
@@ -122,18 +122,12 @@ rm(eng_lad, wal_lad)
 lad_shp@data <- dplyr::select(lad_shp@data, -altname, -oldlabel)
 
 
-
-
-
-lad_shp_data <- lad_shp@data
-lad_shp <- gSimplify(lad_shp, tol = 1000, topologyPreserve = TRUE)
-lad_shp <- SpatialPolygonsDataFrame(lad_shp, lad_shp_data)
+# rmapshaper::ms_simplify() preserves topology
+lad_shp <- ms_simplify(lad_shp, keep = 0.04)
 
 
 
 
-
-stop()
 
 # Find unmatched codes
 replacements <- dplyr::full_join(lad_shp@data, lad,
