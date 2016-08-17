@@ -124,29 +124,26 @@ lad_shp@data <- dplyr::select(lad_shp@data, -altname, -oldlabel)
 
 # rmapshaper::ms_simplify() preserves topology
 lad_shp <- ms_simplify(lad_shp, keep = 0.04)
-
-
-anti_join(lad_shp@data, lad_score, by = c("label" = "GEOGRAPHY_CODE"))
+lad_shp@data[] <- lapply(lad_shp@data, as.character)  # [] maintains df class
 
 
 # Find unmatched codes
-replacements <- dplyr::full_join(lad_shp@data, lad,
+replacements <- dplyr::full_join(lad_shp@data, lad_score,
                                  by = c("label" = "GEOGRAPHY_CODE"))
 replacements <- replacements[is.na(replacements$GEOGRAPHY_NAME), ]
 
 for (i in seq_along(replacements$GEOGRAPHY_NAME)) {
-  lad$code[lad$name == replacements$GEOGRAPHY_NAME[i]] <-
+  lad_score$GEOGRAPHY_CODE[lad_score$GEOGRAPHY_NAME ==
+                             replacements$GEOGRAPHY_NAME[i]] <-
     replacements$label[i]
 }
-rm(i)
-rm(replacements)
+rm(i, replacements)
 
-lad_shp@data <- dplyr::inner_join(lad_shp@data, lad,
-                                  by = c("label" = "code"))
 
-if (nrow(lad) != nrow(lad_shp)) {
-  stop("Error in shapefile join, nrows do not match")
-}
+lad_shp@data <- dplyr::inner_join(lad_shp@data, lad_score,
+                                  by = c("label" = "GEOGRAPHY_CODE"))
+stopifnot(nrow(lad_score) != nrow(lad_shp))
 
-# Write updated shapefile
-rgdal::writeOGR(lad_shp, "data", driver = "ESRI Shapefile")
+
+# Write rds object
+saveRDS(lad_shp, file = "data/lad_shp")
