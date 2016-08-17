@@ -1,10 +1,8 @@
-# 1. Download and unzip census data from NOMIS API
-# 2. Tidy census data
-# 3. Calculate individual z-scores
-# 4. Merge z-scores into one data frame
-# 5. Calculate overall z-score
-# 6. Obtain shapefiles from census.ukdataservice.ac.uk
-# 7. Merge England and Wales Shapefiles
+# 1. Tidy census data
+# 2. Calculate individual z-scores
+# 3. Merge z-scores into one data frame
+# 4. Calculate overall z-score
+# 5. Merge England and Wales Shapefiles
 
 
 # Packages ====
@@ -99,24 +97,7 @@ rm(lad_car, lad_eau, lad_ppr, lad_ten)
 
 
 lad$z <- rowSums(lad[, grep("z_", colnames(lad))])
-
-
-
-
-
-# Move shapefiles to separate folder
-# qgis:mergevectorlayers alg expects all files to be merged in one dir
-dir.create("inst/extdata/shapefiles", showWarnings = FALSE)
-
-shapes <- list.files("inst/extdata/", pattern = "wales", full.names = TRUE)
-file.copy(shapes, "inst/extdata/shapefiles/")
-file.remove(shapes)
-
-shapes <- list.files("inst/extdata/", pattern = "england", full.names = TRUE)
-file.copy(shapes, "inst/extdata/shapefiles/")
-file.remove(shapes)
-rm(shapes)
-
+stop()
 
 get_usage(alg = "qgis:mergevectorlayers", qgis_env = my_env, intern = TRUE)
 
