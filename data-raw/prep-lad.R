@@ -10,6 +10,7 @@ library("tidyr")
 library("dplyr")
 library("magrittr")
 library("rgdal")
+library("raster")
 library("RQGIS"); my_env <- set_env("/usr")
 
 
@@ -115,6 +116,9 @@ stop()
 
 eng_lad <- readOGR("inst/extdata", "england_lad_2011_gen")
 wal_lad <- readOGR("inst/extdata", "wales_lad_2011_gen")
+
+lad_shp <- raster::union(eng_lad, wal_lad)
+
 
 params <- get_args_man(alg = "qgis:mergevectorlayers", qgis_env = my_env)
 params$LAYERS <- c(eng_lad, wal_lad)
