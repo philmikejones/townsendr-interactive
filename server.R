@@ -1,26 +1,25 @@
 
 library("shiny")
-library("ggplot2")
+library("leaflet")
 library("magrittr")
 library("dplyr")
 
-map = readRDS("data/townsend_lad.rds")
+map <- readRDS("data/lad_shp.rds")
 
 shinyServer(function(input, output) {
 
-  townsend_lad <- function() {
+  lad_score <- function() {
 
-    ggplot() + geom_polygon(data = map, aes(long, lat, group = group, fill = z),
-                            colour = "black") +
-      coord_equal()
+    leaflet(map) %>%
+      addPolygons()
 
   }
 
-  output$map  <- renderPlot({ townsend_lad() })
+  output$map  <- renderPlot({ lad_score() })
 
   output$info <- renderPrint({
 
-    nearPoints(map, input$plot_hover) %>%
+    nearPoints(map, input$plot_click) %>%
       select(id, z, name) %>%
       unique()
 
