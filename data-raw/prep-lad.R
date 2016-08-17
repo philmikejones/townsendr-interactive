@@ -126,7 +126,7 @@ lad_shp@data <- dplyr::select(lad_shp@data, -altname, -oldlabel)
 lad_shp <- ms_simplify(lad_shp, keep = 0.04)
 
 
-
+anti_join(lad_shp@data, lad_score, by = c("label" = "GEOGRAPHY_CODE"))
 
 
 # Find unmatched codes
