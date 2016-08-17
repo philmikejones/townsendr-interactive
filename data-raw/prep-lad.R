@@ -139,6 +139,32 @@ utils::download.file(wal_lad, "inst/extdata/wal_lad.zip", method = "wget")
 utils::unzip("inst/extdata/wal_lad.zip", exdir = "inst/extdata")
 
 
+# Move shapefiles to separate folder
+# qgis:mergevectorlayers alg expects all files to be merged in one dir
+dir.create("inst/extdata/shapefiles", showWarnings = FALSE)
+
+stop()
+
+list.files("inst/extdata/", pattern = "wales", full.names = TRUE) %>%
+  file.copy("inst/extdata/shapefiles/")
+list.files("inst/extdata/", pattern = "england", full.names = TRUE) %>%
+  file.copy("inst/extdata/shapefiles/")
+
+
+
+
+find_algorithms(search_term = "merge", qgis_env = my_env)
+get_usage(alg = "qgis:mergevectorlayers", qgis_env = my_env, intern = TRUE)
+
+
+
+
+
+
+
+
+
+
 
 
 
