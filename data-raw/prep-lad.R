@@ -4,12 +4,14 @@
 # 4. Merge z-scores into one data frame
 # 5. Calculate overall z-score
 # 6. Obtain shapefiles from census.ukdataservice.ac.uk
+# 7. Merge England and Wales Shapefiles
 
 
 # Packages ====
 library("tidyr")
 library("dplyr")
 library("magrittr")
+library("RQGIS"); my_env <- set_env("/usr")
 
 
 # Functions ====
@@ -135,17 +137,6 @@ wal_lad <- paste0("https://census.edina.ac.uk/ukborders/easy_download/",
                   "prebuilt/shape/Wales_lad_2011_gen.zip")
 utils::download.file(wal_lad, "inst/extdata/wal_lad.zip", method = "wget")
 utils::unzip("inst/extdata/wal_lad.zip", exdir = "inst/extdata")
-
-
-stop()
-
-# Prepare raw downloaded shapefiles and simplify
-# Shapefiles are obtained by source("data-raw/0-download-data.R")
-
-
-# Mege England and Wales shapefiles ====
-
-
 
 
 
