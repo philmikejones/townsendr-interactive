@@ -146,4 +146,4 @@ stopifnot(nrow(lad_score) != nrow(lad_shp))
 
 
 # Write rds object
-saveRDS(lad_shp, file = "data/lad_shp")
+saveRDS(lad_shp, file = "data/lad_shp.rds")
