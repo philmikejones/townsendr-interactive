@@ -7,9 +7,10 @@
 
 # Packages ====
 library("tidyr")
-library("dplyr")
 library("magrittr")
+library("dplyr")
 library("rgdal")
+library("rmapshaper")
 library("RQGIS"); my_env <- set_env("/usr")
 
 
@@ -113,6 +114,7 @@ stopifnot(
   all.equal(nrow(wal_lad) + nrow(eng_lad), wal_max)
 )
 spChFIDs(wal_lad) <- as.character(wal_min:wal_max)
+rm(wal_max, wal_min)
 
 lad_shp <- rbind(eng_lad, wal_lad)
 rm(eng_lad, wal_lad)
@@ -121,29 +123,13 @@ lad_shp@data <- dplyr::select(lad_shp@data, -altname, -oldlabel)
 
 
 
-# #! /bin/bash
-#
-#
-#
-# ogr2ogr -simplify 100 -f 'ESRI Shapefile' \
-# inst/extdata/lad_2011_simp.shp         \
-# inst/extdata/lad_2011_gen.shp
 
 
+lad_shp_data <- lad_shp@data
+lad_shp <- gSimplify(lad_shp, tol = 1000, topologyPreserve = TRUE)
+lad_shp <- SpatialPolygonsDataFrame(lad_shp, lad_shp_data)
 
 
-
-
-params <- get_args_man(alg = "qgis:mergevectorlayers", qgis_env = my_env)
-params$LAYERS <- c(eng_lad, wal_lad)
-params$OUTPUT <- file.path(file.path(getwd(), "inst/extdata/"), "test.shp")
-run_qgis(alg = "qgis:mergevectorlayers", params = params, qgis_env = my_env)
-
-get_usage(alg = "qgis:mergevectorlayers", qgis_env = my_env, intern = TRUE)
-
-
-# Add z-scores to shapefile ====
-# Load shape and drop unneeded variables
 
 
 
