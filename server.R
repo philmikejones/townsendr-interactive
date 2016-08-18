@@ -8,14 +8,14 @@ lad_map <- readRDS("data/lad_shp.rds")
 
 shinyServer(function(input, output) {
 
-  lad_score <- function() {
+  output$map  <- renderLeaflet({
 
-    leaflet(lad_map) %>%
-      addPolygons()
+      leaflet(lad_map) %>%
+        addTiles(
+          attribution = "Townsend"
+        )
 
-  }
-
-  output$map  <- renderPlot({ lad_score() })
+  })
 
   output$info <- renderPrint({
 
