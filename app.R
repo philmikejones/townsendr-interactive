@@ -30,7 +30,10 @@ server <- function(input, output, session) {
       addPolygons(weight = 1,
                   fillOpacity = 0.8, fillColor = ~pal(z)) %>%
       addProviderTiles("OpenStreetMap.Mapnik",
-                       options = providerTileOptions(opacity = 0.35))
+                       options = providerTileOptions(opacity = 0.35)) %>%
+      addLegend("bottomright", pal = pal, values = ~z,
+                title = "Z-score",
+                opacity = 0.8)
 
   })
 
