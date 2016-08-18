@@ -1,0 +1,10 @@
+name: townsendr
+account: philmikejones
+server: shinyapps.io
+appId: 120761
+bundleId: 534947
+url: https://philmikejones.shinyapps.io/townsendr/
+when: 1471518287.3864
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .gitattributes|LICENSE|README.md|data-raw/0-download-files.R|data-raw/prep-lad.R|inst/extdata/eng_lad.zip|inst/extdata/england_lad_2011_gen.dbf|inst/extdata/england_lad_2011_gen.prj|inst/extdata/england_lad_2011_gen.shp|inst/extdata/england_lad_2011_gen.shx|inst/extdata/lad_car.csv|inst/extdata/lad_eau.csv|inst/extdata/lad_ppr.csv|inst/extdata/lad_ten.csv|inst/extdata/TermsAndConditions.html|inst/extdata/wales_lad_2011_gen.dbf|inst/extdata/wales_lad_2011_gen.prj|inst/extdata/wales_lad_2011_gen.shp|inst/extdata/wales_lad_2011_gen.shx|inst/extdata/wal_lad.zip
