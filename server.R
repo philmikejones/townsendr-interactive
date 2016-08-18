@@ -4,13 +4,13 @@ library("leaflet")
 library("magrittr")
 library("dplyr")
 
-map <- readRDS("data/lad_shp.rds")
+lad_map <- readRDS("data/lad_shp.rds")
 
 shinyServer(function(input, output) {
 
   lad_score <- function() {
 
-    leaflet(map) %>%
+    leaflet(lad_map) %>%
       addPolygons()
 
   }
@@ -19,9 +19,7 @@ shinyServer(function(input, output) {
 
   output$info <- renderPrint({
 
-    nearPoints(map, input$plot_click) %>%
-      select(id, z, name) %>%
-      unique()
+    nearPoints(lad_map, input$plot_click)
 
   })
 
