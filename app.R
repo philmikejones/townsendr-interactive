@@ -16,7 +16,8 @@ server <- function(input, output, session) {
 
   output$map  <- renderLeaflet({
 
-    leaflet()
+    leaflet(lad_map) %>%
+      addPolygons()
 
   })
 
