@@ -127,40 +127,24 @@ lad_shp <- ms_simplify(lad_shp, keep = 0.04)
 lad_shp@data[] <- lapply(lad_shp@data, as.character)  # [] maintains df class
 
 
-fix <- anti_join(lad_shp@data, lad_score, by = c("label" = "GEOGRAPHY_CODE"))
-stop()
-fix$label[]
+lad_data <- inner_join(lad_shp@data, lad_score,
+                      by = c("label" = "GEOGRAPHY_CODE")) %>%
+  select(-GEOGRAPHY_NAME)
 
-lad_score$GEOGRAPHY_CODE[lad_score$GEOGRAPHY_NAME %in% fix$name, ] <-
-  lad_shp@data$label[lad_shp@data$name %in% fix$name]
+# Some codes are incorrect in NOMIS data
+replacement <- anti_join(lad_shp@data, lad_score,
+                         by = c("label" = "GEOGRAPHY_CODE")) %>%
+  arrange(name) %>%
+  left_join(lad_score, by = c("name" = "GEOGRAPHY_NAME")) %>%
+  select(-GEOGRAPHY_CODE)
 
+lad_data <- rbind(lad_data, replacement)
 
-for (i in seq_along(fix$name)) {
-  lad_shp@data$label[lad_shp@data$name == i] <-
-    fix$label[fix$name == i]
-}
-
-
-# Find unmatched codes
-
-for (i in seq_along(replacements$GEOGRAPHY_NAME)) {
-  lad_score$GEOGRAPHY_CODE[lad_score$GEOGRAPHY_NAME ==
-                             replacements$GEOGRAPHY_NAME[i]] <-
-    replacements$label[i]
-}
-rm(i, replacements)
-
-
-lad_shp@data <- dplyr::inner_join(lad_shp@data, lad_score,
-                                  by = c("label" = "GEOGRAPHY_CODE"))
-stopifnot(nrow(lad_score) != nrow(lad_shp))
-
-nrow(lad_shp@data)
-sapply(lad_shp@polygons, function(x) slot(x, "ID"))
+lad_shp@data <- inner_join(lad_shp@data, lad_data)
 
 
 # Convert to WGS84 for leaflet
-spTransform(map, CRS("+init=epsg:4326"))
+lad_shp <- spTransform(lad_shp, CRS("+init=epsg:4326"))
 
 
 # Write rds object
