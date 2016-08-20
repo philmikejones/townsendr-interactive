@@ -21,10 +21,6 @@
           <h1 id="project_title">Townsendr</h1>
           <h2 id="project_tagline">2011 Townsend Material Deprivation Score</h2>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/philmikejones/townsendr/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/philmikejones/townsendr/tarball/master">Download this project as a tar.gz file</a>
-            </section>
         </header>
     </div>
 
@@ -32,6 +28,69 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <iframe src="https://philmikejones.shinyapps.io/townsendr/" width="640" height="640"></iframe>  
+        
+        <h2>Introduction</h2>
+
+        <p>The Townsend Material Deprivation score was originally devised by Townsend et al
+(1988). It is based on the following four Census variables:</p>
+
+        <ol>
+            <li>Percent of households without access to a car (car)</li>
+            <li>Percent of households with more than one person per room (ppr)</li>
+            <li>Percent of households not owner-occupied (ten)</li>
+            <li>Percent of individuals who are economically active unemployed (eau)</li>
+        </ol>
+
+        <p>The four domains above are then combined to produce the overall Townsend Score.
+This score can be calculated for any geographical area that is available in the
+Census tables, for example LSOA, MSOA, Ward, LAD, etc.</p>
+
+        <p>Because of the way the score is combined, only the relative rank of the scores
+is meaningful. In practice, this means it is possible to say an area is more or
+less deprived than another, but not what ‘amount’ of deprivation it experiences.
+For this reason it is common to create a score based on a national dataset. This
+script uses data from England and Wales (Scotland and Northern Ireland tables
+were not available at the time of publication (February 2014)). Thus, the scores
+reflect the relative deprivation of an area based on similar areas in England
+and Wales.</p>
+
+        <h2>License</h2>
+
+        <p>Calculate Townsend Material Deprivation Score from 2011 Census Data in the UK Copyright (C) 2014--2016 Phil Mike Jones - orcid.org/0000-0001-5173-3245</p>
+
+        <p>This programme is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.</p>
+
+        <p>This programme is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+
+        <p>You should have received a copy of the GNU General Public License along with
+this programme. If not, see <http://www.gnu.org/licenses/>.</p>
+
+        <p>See LICENSE</p>
+
+
+        <h2>Contact</h2>
+        <p>philmikejones at gmail dot com (no spaces)</p>
+
+        <h2>Thanks and acknowledgements</h2>
+        <p></p>Thanks to Robin Lovelace - https://github.com/Robinlovelace - for having
+a once-over of the script and his suggestions.</p>
+
+
+        <h2>References</h2>
+        <ul>
+          <li>Office for National Statistics, 2011 Census: Aggregate data (England and Wales) [computer file]. Downloaded from: http://www.nomisweb.co.uk/census/2011 [Accessed February 2014]. This information is licensed under the terms of the Open Government Licence [http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2].</li>
+          <li>Office for National Statistics, 2011 Census: Digitised Boundary Data (England and Wales) [computer file]. UK Data Service Census Support. Downloaded from: http://edina.ac.uk/census</li>
+          <li>Townsend, Peter, Phillimore, Peter and Beattie, Alastair (1988) 'Health and Deprivation: Inequality and the North'. London: Croom Helm</li>
+        </ul>
+
+
+
+        
       </section>
     </div>
 
