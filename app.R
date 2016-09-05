@@ -17,7 +17,7 @@ ui <- fluidPage(div(class = "outer",
 
 server <- function(input, output, session) {
 
-  lad_map <- readRDS("data/lad_shp.rds")
+  lad_map <- load("data/lad_shp.RData")
 
   pal <- colorNumeric(
     palette = "Blues",
