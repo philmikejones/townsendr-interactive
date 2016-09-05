@@ -147,5 +147,12 @@ lad_shp@data <- inner_join(lad_shp@data, lad_data)
 lad_shp <- spTransform(lad_shp, CRS("+init=epsg:4326"))
 
 
-# Write rds object
-saveRDS(lad_shp, file = "data/lad_shp.rds")
+# Write data
+save(lad_shp, file = "data/lad_shp.RData", compress = "xz")
+
+
+# Remove files
+file.remove(list.files("inst/extdata/", full.names = TRUE,
+                       pattern = ".dbf|.prj|.shp|.shx"))
+
+
